@@ -26,7 +26,7 @@ const LandingPage = () => {
         <button onClick={handleGetStarted}>Get Started</button>
         </div>
       )}
-       
+      <div> Here is landing page</div>   
 
     </div>
     
