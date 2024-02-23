@@ -5,6 +5,7 @@ const AdminPersonalInformation = () => {
     <div>
       <h2>AdminPersonalInformation</h2>
       <h2>Admin Interface</h2>
+      <h2> Admin Interface 2 </h2>
     </div>
   );
 }
