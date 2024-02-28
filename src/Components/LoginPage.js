@@ -39,7 +39,7 @@ let submitHandler =async (values, actions) => {
           <h1 className="text-center text-5xl text-blue font-bold drop-shadow-lg">Login</h1>
           <div className="w-80 my-7">
             <form onSubmit={handleSubmit} autoComplete="off" >
-              <label htmlFor="email" className="block mb-2">Email</label>
+              <label htmlFor="employeeId" className="block mb-2">Employee ID</label>
               <input
                 value={values.employeeId}
                 type="text"
@@ -49,7 +49,7 @@ let submitHandler =async (values, actions) => {
                 onChange={handleChange}
                 onBlur={handleBlur}     
               />
-              {errors.employeeId && touched.employeeId && <p>{errors.employeeId}</p>}
+              {errors.employeeId && touched.employeeId && <p className="text-[#dc2626] mb-2">{errors.employeeId}</p>}
               <label htmlFor="password" className="block mb-2">Password</label>
               <div className="relative">
                 <input
@@ -61,7 +61,7 @@ let submitHandler =async (values, actions) => {
                   onChange={handleChange}
                   onBlur={handleBlur} 
                 />
-                {errors.password && touched.password && <p>{errors.password}</p>}
+                {errors.password && touched.password && <p className="text-[#dc2626]">{errors.password}</p>}
               </div>
               <button type='submit' className=" w-full mt-8 px-12 py-3 bg-blue text-xl text-white font-semibold drop-shadow-lg rounded-full hover:bg-blue-600">
                 Login
