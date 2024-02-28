@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import LandingPage from './Components/LandingPage';
-import Login from'./Components/login';
+import Login from'./Components/LoginPage';
+import Homepage from'./Components/HomePage';
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -13,7 +14,7 @@ function App() {
       {isLoggedIn ? (
         <Login />
       ) : (
-        <LandingPage onLogin={handleLogin} />
+        <Homepage onLogin={handleLogin} />
       )}
     </div>
   );
