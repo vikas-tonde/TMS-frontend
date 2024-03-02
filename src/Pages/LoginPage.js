@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const submitHandler = async (values, actions) => {
-    const response = await fetch("http://10.0.2.216:5000/api/users/login", {
+    const response = await fetch("http://localhost:5000/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
