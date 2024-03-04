@@ -4,7 +4,6 @@ import { MdMessage } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
-import { BsCartCheck } from "react-icons/bs";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -87,6 +86,7 @@ const routes = [
   },
 ];
 
+
 const SideBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -126,7 +126,7 @@ const SideBar = ({ children }) => {
 
   return (
     <>
-      <div className="main-container">
+      <div className="flex h-screen bg-gray-200">
         <motion.div
           animate={{
             width: isOpen ? "200px" : "45px",
@@ -137,9 +137,9 @@ const SideBar = ({ children }) => {
               damping: 10,
             },
           }}
-          className={`sidebar `}
+          className={`sidebar bg-[#0A1C3E] text-white flex flex-col `}
         >
-          <div className="top_section">
+          <div className="flex items-center justify-between p-4">
             <AnimatePresence>
               {isOpen && (
                 <motion.h1
@@ -149,7 +149,7 @@ const SideBar = ({ children }) => {
                   exit="hidden"
                   className="logo"
                 >
-                  Admin 
+                  Admin
                 </motion.h1>
               )}
             </AnimatePresence>
@@ -158,8 +158,8 @@ const SideBar = ({ children }) => {
               <FaBars onClick={toggle} />
             </div>
           </div>
-          <div className="search">
-            <div className="search_icon">
+          <div className="flex items-center bg-gray-200 rounded p-2">
+            <div className="mr-2">
               <BiSearch />
             </div>
             <AnimatePresence>
@@ -171,51 +171,59 @@ const SideBar = ({ children }) => {
                   variants={inputAnimation}
                   type="text"
                   placeholder="Search"
+                  className="bg-transparent outline-none"
                 />
               )}
             </AnimatePresence>
           </div>
-          <section className="routes">
-            {routes.map((route, index) => {
-              if (route.subRoutes) {
-                return (
-                  <SidebarMenu
-                    setIsOpen={setIsOpen}
-                    route={route}
-                    showAnimation={showAnimation}
-                    isOpen={isOpen}
-                  />
-                );
-              }
 
-              return (
-                <NavLink
-                  to={route.path}
-                  key={index}
-                  className="link"
-                  activeClassName="active"
-                >
-                  <div className="icon">{route.icon}</div>
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        variants={showAnimation}
-                        initial="hidden"
-                        animate="show"
-                        exit="hidden"
-                        className="link_text"
-                      >
-                        {route.name}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </NavLink>
-              );
-            })}
+          <section className="routes">
+            <div className="flex flex-col flex-wrap justify-between items-start overflow-y-auto">
+              {routes.map((route, index) => {
+                if (route.subRoutes) {
+                  return (
+                    <SidebarMenu
+                      setIsOpen={setIsOpen}
+                      route={route}
+                      showAnimation={showAnimation}
+                      isOpen={isOpen}
+                    />
+                  );
+                }
+
+                return (
+                  <NavLink
+                    to={route.path}
+                    key={index}
+                    className="link"
+                    activeClassName="active"
+                  >
+                    <div className="flex items-center p-2">
+                      <div className="mr-2">{route.icon}</div>
+                      <div>
+                        <AnimatePresence>
+                          {isOpen && (
+                            <motion.div
+                              variants={showAnimation}
+                              initial="hidden"
+                              animate="show"
+                              exit="hidden"
+                              className="link_text"
+                            >
+                              {route.name}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+                  </NavLink>
+                );
+              })}
+            </div>
           </section>
         </motion.div>
 
-        <main>{children}</main>
+        <div className="flex-grow">{children}</div>
       </div>
     </>
   );

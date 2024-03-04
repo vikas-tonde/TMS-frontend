@@ -29,25 +29,26 @@ let submitHandler = async (values, actions) => {
 }
 
 
-const Login = () => {
+const { handleChange, handleBlur, values, handleSubmit, errors, touched } = useFormik({
+  initialValues: {
+    employeeId: '',
+    password: ''
+  },
+  validationSchema: loginSchema,
+  onSubmit: submitHandler
+});
 
-  const { handleChange, handleBlur, values, handleSubmit, errors, touched } = useFormik({
-    initialValues: {
-      employeeId: '',
-      password: ''
-    },
-    validationSchema: loginSchema,
-    onSubmit: submitHandler
-  });
+const navigate = useNavigate()
 
-  const navigate = useNavigate()
- 
-  const navigateHandler = () => {
-      navigate('/dashboard');
-    }
+const navigateHandler = () => {
+  navigate('/dashboard');
+}
 
-  return (
-    <>
+return (
+  <>
+    <div
+      className="w-full h-screen bg-[url('assets/Homepage.png')] bg-cover bg-center mix-blend-overlay flex justify-end items-center mx-30">
+
       <div className="flex flex-col justify-end items-center top-2 right-2 mx-60">
         <h1 className="text-center text-5xl text-blue font-bold drop-shadow-lg">Login</h1>
         <div className="w-80 my-7">
@@ -85,8 +86,9 @@ const Login = () => {
           </form>
         </div>
       </div>
-    </>
-  );
+    </div>
+  </>
+);
 };
 
 export default Login
