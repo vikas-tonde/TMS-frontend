@@ -1,34 +1,35 @@
 import React from 'react'
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { redirect } from "react-router-dom"
+
+import { useNavigate } from 'react-router';
 
 let loginSchema = object().shape({
   employeeId: string().required("Employee Id is required"),
   password: string().required("Password is required")
 });
 
-const Login = () => {
-  const navigate = useNavigate();
+let submitHandler = async (values, actions) => {
+  const response = await fetch("http://10.0.2.216:5000/api/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(values)
+  });
+  let { data } = await response.json();
+  actions.resetForm();
+  if (data?.user === null || data?.user === undefined) {
+    redirect('/');
+  }
+  else {
+    redirect('/dashboard');
+  }
+}
 
-  const submitHandler = async (values, actions) => {
-    const response = await fetch("http://10.0.2.216:5000/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(values)
-    });
-    const { data } = await response.json();
-    actions.resetForm();
-    if (data?.user === null || data?.user === undefined) {
-      
-      navigate('/dashboard');
-    } else {
-      
-      navigate('/dashboard');
-    }
-  };
+
+const Login = () => {
 
   const { handleChange, handleBlur, values, handleSubmit, errors, touched } = useFormik({
     initialValues: {
@@ -38,6 +39,12 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: submitHandler
   });
+
+  const navigate = useNavigate()
+ 
+  const navigateHandler = () => {
+      navigate('/dashboard');
+    }
 
   return (
     <>
@@ -69,7 +76,7 @@ const Login = () => {
               />
               {errors.password && touched.password && <p className="text-[#dc2626]">{errors.password}</p>}
             </div>
-            <button type='submit' className="w-full mt-8 px-12 py-3 bg-blue text-xl text-white font-semibold drop-shadow-lg rounded-full hover:bg-blue-600">
+            <button type='submit' onClick={() => navigateHandler("")} className=" w-full mt-8 px-12 py-3 bg-blue text-xl text-white font-semibold drop-shadow-lg rounded-full hover:bg-blue-600">
               Login
             </button>
             <div className="mt-4 text-center">
@@ -82,4 +89,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login

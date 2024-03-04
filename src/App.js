@@ -4,6 +4,7 @@ import Login from './Pages/LoginPage';
 import Homepage from './Pages/HomePage';
 import Dashboard from "./Pages/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './Components/services/AuthContext';
 
 import Users from "./Pages/Users";
 import Messages from "./Pages/Messages";
@@ -18,6 +19,7 @@ import TraineeSideBar from "./Components/Sidebar/TranieeSidebar";
 
 function App() {
   return (
+   
     <Router>
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -32,6 +34,7 @@ function App() {
         <Route path="/settings" element={<Setting />} />
       </Routes>
     </Router>
+   
   );
 }
 
