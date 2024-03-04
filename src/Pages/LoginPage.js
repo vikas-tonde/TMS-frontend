@@ -20,6 +20,7 @@ let submitHandler = async (values, actions) => {
   });
   let { data } = await response.json();
   actions.resetForm();
+  console.log(data);
   if (data?.user === null || data?.user === undefined) {
     redirect('/');
   }

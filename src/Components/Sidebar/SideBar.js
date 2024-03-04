@@ -17,6 +17,7 @@ const routes = [
     path: "/users",
     name: "Personal Information",
     icon: <FaUser />,
+    
   },
   {
     path: "/messages",
@@ -52,6 +53,7 @@ const routes = [
         path: "/settings/hydrabad",
         name: "Hyderabad",
         icon: <FaMoneyBill />,
+
       },
     ],
   },
@@ -187,6 +189,7 @@ const SideBar = ({ children }) => {
                       route={route}
                       showAnimation={showAnimation}
                       isOpen={isOpen}
+                      key={index}
                     />
                   );
                 }
