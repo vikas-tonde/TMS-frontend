@@ -1,49 +1,25 @@
 import React from 'react'
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
-import { redirect } from "react-router-dom"
-
-import { useNavigate } from 'react-router';
+import { useAuth } from '../authService/auth';
+import { useLocation } from 'react-router-dom';
 
 let loginSchema = object().shape({
   employeeId: string().required("Employee Id is required"),
   password: string().required("Password is required")
 });
 
-let submitHandler = async (values, actions) => {
-  const response = await fetch("http://10.0.2.216:5000/api/users/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(values)
-  });
-  let { data } = await response.json();
-  actions.resetForm();
-  console.log(data);
-  if (data?.user === null || data?.user === undefined) {
-    redirect('/');
-  }
-  else {
-    redirect('/dashboard');
-  }
-}
-
 const Login = () => {
+  let auth = useAuth();
+  const location = useLocation();
   const { handleChange, handleBlur, values, handleSubmit, errors, touched } = useFormik({
     initialValues: {
       employeeId: '',
       password: ''
     },
     validationSchema: loginSchema,
-    onSubmit: submitHandler
+    onSubmit: auth.signin
   });
-
-  const navigate = useNavigate()
-
-  const navigateHandler = () => {
-    navigate('/dashboard');
-  }
 
   return (
     <>
@@ -53,6 +29,9 @@ const Login = () => {
         <div className="flex flex-col justify-end items-center top-2 right-2 mx-60">
           <h1 className="text-center text-5xl text-blue font-bold drop-shadow-lg">Login</h1>
           <div className="w-80 my-7">
+            {location.state ?? 
+              <p> {location.state} </p>
+            }
             <form onSubmit={handleSubmit} autoComplete="off" >
               <label htmlFor="employeeId" className="block mb-2">Employee ID</label>
               <input
@@ -78,7 +57,7 @@ const Login = () => {
                 />
                 {errors.password && touched.password && <p className="text-[#dc2626]">{errors.password}</p>}
               </div>
-              <button type='submit' onClick={() => navigateHandler("")} className=" w-full mt-8 px-12 py-3 bg-blue text-xl text-white font-semibold drop-shadow-lg rounded-full hover:bg-blue-600">
+              <button type='submit' className=" w-full mt-8 px-12 py-3 bg-blue text-xl text-white font-semibold drop-shadow-lg rounded-full hover:bg-blue-600">
                 Login
               </button>
               <div className="mt-4 text-center">
