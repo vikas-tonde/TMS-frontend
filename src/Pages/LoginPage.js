@@ -29,9 +29,11 @@ const Login = () => {
         <div className="flex flex-col justify-end items-center top-2 right-2 mx-60">
           <h1 className="text-center text-5xl text-blue font-bold drop-shadow-lg">Login</h1>
           <div className="w-80 my-7">
+          <div className="text-[#dc2626] mb-2">
             {location.state ?? 
               <p> {location.state} </p>
             }
+             </div>
             <form onSubmit={handleSubmit} autoComplete="off" >
               <label htmlFor="employeeId" className="block mb-2">Employee ID</label>
               <input
