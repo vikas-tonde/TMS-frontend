@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { API_BASE_URL } from "../constants";
+import api from "./api";
 let AuthContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -8,16 +8,9 @@ export function AuthProvider({ children }) {
     let navigate = useNavigate();
     let location = useLocation();
     let signin = async (values, actions) => {
-        const response = await fetch(`${API_BASE_URL}/users/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(values)
-        });
-        let { data } = await response.json();
+        let response = await api.post(`/api/users/login`, values);
+        let { data } = response.data;
         actions.resetForm();
-        console.log(data);
         if (data?.user === null || data?.user === undefined) {
             setUser(null);
             navigate("/login", {replace: true, state:"Login Failed check username or password"});

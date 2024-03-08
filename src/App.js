@@ -1,9 +1,7 @@
 import React from 'react';
 import "./index.css";
-import Login from './Pages/LoginPage';
-import Homepage from './Pages/HomePage';
 import Dashboard from "./Pages/Dashboard";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Users from "./Pages/Users";
 import Messages from "./Pages/Messages";
@@ -12,7 +10,8 @@ import Analytics from "./Pages/Analytics";
 import Order from "./Pages/Order";
 import Saved from "./Pages/Saved";
 import Setting from "./Pages/Setting";
-
+import Homepage from './Pages/HomePage';
+import Login from './Pages/LoginPage';
 import SideBar from "./Components/Sidebar/SideBar";
 import TraineeSideBar from "./Components/Sidebar/TranieeSidebar";
 import { AuthProvider, RequireAuth } from './authService/auth';
@@ -20,35 +19,32 @@ import { AuthProvider, RequireAuth } from './authService/auth';
 function App() {
   return (
 
-    <AuthProvider>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-
-        {/**
-           * TODO: Make group ofall admin routes and user routes below
+    <>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <SideBar>
+          <Routes>
+            {/**
+           * TODO: Make group of all admin routes and user routes below
            * 
-           */}
+          */}
 
-        <Route path="/dashboard" element={<RequireAuth> <DashboardWithSidebar /> </RequireAuth>} />
-        <Route path="/users" element={ <RequireAuth> <Users /> </RequireAuth> } />
-        <Route path="/messages" element={<RequireAuth><Messages /> </RequireAuth> } />
-        <Route path="/analytics" element={<RequireAuth><Analytics /> </RequireAuth> } />
-        <Route path="/file-manager" element={<RequireAuth><FileManager /> </RequireAuth> } />
-        <Route path="/order" element={<RequireAuth><Order /> </RequireAuth> } />
-        <Route path="/saved" element={<RequireAuth><Saved /> </RequireAuth> } />
-        <Route path="/settings" element={<RequireAuth><Setting /> </RequireAuth> } />
-      </Routes>
-    </AuthProvider>
-
+            <Route path="/dashboard" element={<RequireAuth> <Dashboard /> </RequireAuth>} />
+            <Route path="/users" element={<RequireAuth> <Users /> </RequireAuth>} />
+            <Route path="/messages" element={<RequireAuth><Messages /> </RequireAuth>} />
+            <Route path="/analytics" element={<RequireAuth><Analytics /> </RequireAuth>} />
+            <Route path="/file-manager" element={<RequireAuth><FileManager /> </RequireAuth>} />
+            <Route path="/order" element={<RequireAuth><Order /> </RequireAuth>} />
+            <Route path="/saved" element={<RequireAuth><Saved /> </RequireAuth>} />
+            <Route path="/settings" element={<RequireAuth><Setting /> </RequireAuth>} />
+          </Routes>
+        </SideBar>
+      </AuthProvider>
+    </>
   );
 }
-
-
-const DashboardWithSidebar = () => (
-  <SideBar>
-    <Dashboard />
-  </SideBar>
-);
 
 export default App;
