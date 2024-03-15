@@ -29,7 +29,9 @@ function App() {
           <Routes>
             {/**
            * TODO: Make group of all admin routes and user routes below
-           * 
+           * <StatissticsTabsMenu />
+           * <HistoricDataMenu />
+           * <Form />
           */}
 
             <Route path="/dashboard" element={<RequireAuth> <Dashboard /> </RequireAuth>} />
