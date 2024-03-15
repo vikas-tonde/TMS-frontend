@@ -3,7 +3,7 @@ import { Tabs, Tab } from './../Components/Tabs';
 import Statistics from "./Statistics";
 import Table from "./../Components/Table";
 
-const StatissticsTabsMenu = () => {
+const StatisticsTabsMenu = () => {
  
   return (
     <>
@@ -32,4 +32,4 @@ const StatissticsTabsMenu = () => {
 };
 
 
-export default StatissticsTabsMenu;
+export default StatisticsTabsMenu;

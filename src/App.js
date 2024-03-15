@@ -29,7 +29,7 @@ function App() {
           <Routes>
             {/**
            * TODO: Make group of all admin routes and user routes below
-           * <StatissticsTabsMenu />
+           * <StatisticsTabsMenu />
            * <HistoricDataMenu />
            * <Form />
           */}
