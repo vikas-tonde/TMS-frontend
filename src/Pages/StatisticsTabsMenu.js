@@ -6,8 +6,8 @@ import Table from "./../Components/Table";
 const StatisticsTabsMenu = () => {
  
   return (
-    <>
-  <div className="bg-white shadow-lg rounded-lg p-6 w-full">
+  <>
+    <div className="bg-white shadow-lg rounded-lg p-6 w-full">
       <Tabs>
         <Tab label="Pune" >
             <Statistics/>
@@ -27,8 +27,8 @@ const StatisticsTabsMenu = () => {
         </Tab>
       </Tabs>
     </div>
-       </>
-       );
+  </>
+);
 };
 
 

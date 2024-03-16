@@ -4,13 +4,13 @@ import api from "../authService/api";
 // axios.defaults.proxy.port ="5000";
 const Dashboard = () => {
   let [users, setUsers] = useState([]);
-  useEffect(() => {
-    ; (async () => {
-      let { data } = await api.get(`/api/users`);
-      setUsers(data.data);
-    })();
-  },[]);
-  console.log(users);
+  // useEffect(() => {
+  //   ; (async () => {
+  //     let { data } = await api.get(`/api/users`);
+  //     setUsers(data.data);
+  //   })();
+  // },[]);
+  // console.log(users);
 
   return (
     <>
@@ -37,7 +37,7 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users && users.map((user) => {
+                  {/* {users && users.map((user) => {
                     return (
                       <tr id={user._id} class="bg-gray-100 border-b">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user._id}</td>
@@ -52,7 +52,7 @@ const Dashboard = () => {
                         </td>
                       </tr>
                     );
-                  })}
+                  })} */}
                 </tbody>
               </table>
             </div>
