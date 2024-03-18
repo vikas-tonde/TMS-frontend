@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-        <SideBar>
+        
           <Routes>
             {/**
            * TODO: Make group of all admin routes and user routes below
@@ -43,7 +43,7 @@ function App() {
             <Route path="/saved" element={<RequireAuth><Saved /> </RequireAuth>} />
             <Route path="/settings" element={<RequireAuth><Setting /> </RequireAuth>} />
           </Routes>
-        </SideBar>
+     
       </AuthProvider>
     </>
   );
