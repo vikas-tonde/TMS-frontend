@@ -13,12 +13,12 @@ export function AuthProvider({ children }) {
         actions.resetForm();
         if (data?.user === null || data?.user === undefined) {
             setUser(null);
-            navigate("/login", {replace: true, state:"Login Failed check username or password"});
+            navigate("/login", { replace: true, state: "Login Failed check username or password" });
         }
         else {
             setUser(data.user);
-            let from = location.state?.from?.pathname || "/dashboard";
-            navigate(from, {replace: true, state:"Login success"});
+            let to = location.state?.from?.pathname || "/dashboard";
+            navigate(to, { replace: true, state: "Login success" });
         }
     };
 
@@ -26,10 +26,8 @@ export function AuthProvider({ children }) {
         setUser(null);
         navigate("/");
     };
-
-    let value = { user, signin, signout };
-
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    let value = { user, signin, signout, setUser };
+    return <AuthContext.Provider value={value}> {children} </AuthContext.Provider>;
 }
 
 export function useAuth() {
@@ -39,14 +37,24 @@ export function useAuth() {
 export function RequireAuth({ children }) {
     let auth = useAuth();
     let location = useLocation();
-
+    let handleRefresh = async () => {
+        let response = await api.get("/api/users/");
+        let { data } = response.data;
+        console.log("Logged in after refresh.");
+        auth.setUser(data.user);
+    }
     if (!auth?.user) {
         // Redirect them to the /login page, but save the current location they were
         // trying to go to when they were redirected. This allows us to send them
         // along to that page after they login, which is a nicer user experience
         // than dropping them off on the home page.
-        return <Navigate to="/login" state={{ from: location }} replace />;
+        try {
+            handleRefresh();
+        } catch (error) {
+            return <Navigate to="/login" state="Please login again.." replace />;
+        }
     }
 
     return children;
 }
+

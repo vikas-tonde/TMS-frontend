@@ -20,6 +20,7 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: auth.signin
   });
+  console.log("location state;",location.state);
 
   return (
     <>

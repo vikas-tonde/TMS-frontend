@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./index.css";
 import Dashboard from "./Pages/Dashboard";
 import { Routes, Route } from 'react-router-dom';
@@ -14,37 +14,53 @@ import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
 import SideBar from "./Components/Sidebar/SideBar";
 import TraineeSideBar from "./Components/Sidebar/TranieeSidebar";
-import { AuthProvider, RequireAuth } from './authService/auth';
-
+import { AuthProvider, RequireAuth, useAuth } from './authService/auth';
+import api from './authService/api';
+import { useNavigate } from 'react-router-dom/dist/umd/react-router-dom.development';
+import Layout from './Components/Layout';
 function App() {
+  let navigate = useNavigate();
+  let auth = useAuth();
+  let handleRefresh = async () => {
+    try {
+      let response = await api.get("/api/users/");
+      let { data } = response.data;
+      console.log("Logged in after refresh.");
+      auth.setUser(data.user)
+    } catch (error) {
+      navigate("/login", { replace: true, state: "Please login first.." });
+    }
+  }
+  useEffect(() => {
+    handleRefresh();
+  }, [])
+
   return (
 
     <>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-        
-          <Routes>
-            {/**
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+
+      <Routes>
+        {/**
            * TODO: Make group of all admin routes and user routes below
            * <StatisticsTabsMenu />
            * <HistoricDataMenu />
            * <Form />
           */}
-
-            <Route path="/dashboard" element={<RequireAuth> <Dashboard /> </RequireAuth>} />
-            <Route path="/users" element={<RequireAuth> <Users /> </RequireAuth>} />
-            <Route path="/messages" element={<RequireAuth><Messages /> </RequireAuth>} />
-            <Route path="/analytics" element={<RequireAuth><Analytics /> </RequireAuth>} />
-            <Route path="/file-manager" element={<RequireAuth><FileManager /> </RequireAuth>} />
-            <Route path="/order" element={<RequireAuth><Order /> </RequireAuth>} />
-            <Route path="/saved" element={<RequireAuth><Saved /> </RequireAuth>} />
-            <Route path="/settings" element={<RequireAuth><Setting /> </RequireAuth>} />
-          </Routes>
-     
-      </AuthProvider>
+        <Route element={<RequireAuth> <Layout/> </RequireAuth>}>
+          <Route path="/dashboard" element={ <Dashboard /> } />
+          <Route path="/users" element={ <Users /> } />
+          <Route path="/messages" element={<Messages /> } />
+          <Route path="/analytics" element={ <Analytics /> } />
+          <Route path="/file-manager" element={<FileManager /> } />
+          <Route path="/order" element={<Order /> } />
+          <Route path="/saved" element={<Saved /> } />
+          <Route path="/settings" element={<Setting /> } />
+        </Route>
+      </Routes>
     </>
   );
 }

@@ -141,7 +141,7 @@ const SideBar = ({ children }) => {
           }}
           className={`sidebar bg-[#0A1C3E] text-white flex flex-col `}
         >
-          <div className="flex items-center justify-between p-4">
+          <div className="flex flex-none items-center justify-between p-4">
             <AnimatePresence>
               {isOpen && (
                 <motion.h1
