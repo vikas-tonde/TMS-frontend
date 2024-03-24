@@ -26,70 +26,70 @@ const Statistics = () => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-center content-between max-w-full">
-        <div className="items-center w-full md:w-1/2 px-4 bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-          <h2 className="text-lg font-semibold text-center py-2 text-[#0A1C3E] dark:text-white border-b border-gray-200 dark:border-gray-700">Toppers</h2>
-          <Slider {...settings}>
-            {entries.map((entry, index) => (
-              <div key={index} className="py-3 sm:py-4">
-                <div class="w-full px-10 pt-10">
-                  <div class="relative mb-32 max-w-sm mx-auto mt-24">
-                    <div class="rounded overflow-hidden shadow-md bg-white">
-                      <div class="absolute -mt-20 w-full flex justify-center">
-                        <div class="h-32 w-32">
-                          <img src="https://randomuser.me/api/portraits/women/49.jpg" class="rounded-full object-cover h-full w-full shadow-md" />
+      <div className="flex items-center justify-center mt-8 mb-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="items-center">
+            <h2 className="text-lg font-semibold text-center py-2 text-[#0A1C3E] ">Toppers</h2>
+            <Slider {...settings} className="max-w-3xl mx-auto">
+              {entries.map((entry, index) => (
+                <div key={index} className="py-3 sm:py-4">
+                  <div className="w-full px-10 pt-10">
+                    <div className="relative mb-32 max-w-sm mx-auto mt-24">
+                      <div className="rounded overflow-hidden shadow-md bg-white">
+                        <div className="absolute -mt-20 w-full flex justify-center">
+                          <div className="h-32 w-32">
+                            <img src="https://randomuser.me/api/portraits/women/49.jpg" className="rounded-full object-cover h-full w-full shadow-md" alt="User avatar" />
+                          </div>
                         </div>
-                      </div>
-                      <div class="px-6 mt-16">
-                        <h1 class="font-bold text-3xl text-center mb-1">{entry.name}</h1>
-                        <p class="text-gray-800 text-sm text-center"> {entry.score}</p>
-                        <p class="text-center text-gray-600 text-base pt-3 font-normal">{entry.email}</p>
+                        <div className="px-6 mt-16">
+                          <h1 className="font-bold text-3xl text-center mb-1">{entry.name}</h1>
+                          <p className="text-gray-800 text-sm text-center">{entry.score}</p>
+                          <p className="text-center text-gray-600 text-base pt-3 font-normal">{entry.email}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
+              ))}
+            </Slider>
+          </div>
 
-        <div className="w-full md:w-1/2 px-4 flex items-center justify-center">
-          <div className="w-full md:max-w-lg lg:max-w-xl">
-
-            <div className="flex items-center transform hover:scale-105 transition duration-300 bg-gray-500 p-6 m-4 rounded-lg shadow-md text-white">
-              <div className="flex-1 min-w-0">
-                <h2 className="text-lg font-semibold">Number of Exams</h2>
-                <span className="text-sm">Number of exams conducted during the training program.</span>
+          <div className="flex items-center justify-center">
+            <div className="grid grid-cols-1 md:grid-rows-3 gap-4 md:max-w-3xl mx-auto">
+              <div className="flex items-center transform hover:scale-105 transition duration-300 bg-[#0A1C3E] p-6 m-4 rounded-lg shadow-md text-white">
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-lg font-semibold">Number of Exams</h2>
+                  <span className="text-sm">Number of exams conducted during the training program.</span>
+                </div>
+                <div className="inline-flex items-center">
+                  <div className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
+                    <p className="text-3xl font-bold mt-2">18</p>
+                  </div>
+                </div>
               </div>
-              <div className="inline-flex items-center">
-                <di v className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
-                  <p className="text-3xl font-bold mt-2">18</p>
-                </di>
+              <div className="flex items-center transform hover:scale-105 transition duration-300 bg-[#0A1C3E] p-6 m-4 rounded-lg shadow-md text-white">
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-lg font-semibold">Number of Trainees</h2>
+                  <span className="text-sm">Number of trainees currently enrolled in the training program.</span>
+                </div>
+                <div className="inline-flex items-center">
+                  <div className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
+                    <p className="text-3xl font-bold mt-2">27</p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center transform hover:scale-105 transition duration-300 bg-[#0A1C3E] p-6 m-4 rounded-lg shadow-md text-white">
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-lg font-semibold">Ongoing Training</h2>
+                  <span className="text-sm">Number of trainees currently undergoing training.</span>
+                </div>
+                <div className="inline-flex items-center">
+                  <div className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
+                    <p className="text-3xl font-bold mt-2">03</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="flex items-center transform hover:scale-105 transition duration-300 bg-gray-500 p-6 m-4 rounded-lg shadow-md text-white">
-              <div className="flex-1 min-w-0">
-                <h2 className="text-lg font-semibold">Number of Trainees</h2>
-                <span className="text-sm">Number of trainees currently enrolled in the training program.</span>
-              </div>
-              <div className="inline-flex items-center">
-                <di v className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
-                  <p className="text-3xl font-bold mt-2">27</p>
-                </di>
-              </div>
-            </div>
-            <div className="flex items-center transform hover:scale-105 transition duration-300 bg-gray-500 p-6 m-4 rounded-lg shadow-md text-white">
-              <div className="flex-1 min-w-0">
-                <h2 className="text-lg font-semibold">Ongoing Training</h2>
-                <span className="text-sm">Number of trainees currently undergoing training.</span>
-              </div>
-              <div className="inline-flex items-center">
-                <di v className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
-                  <p className="text-3xl font-bold mt-2">03</p>
-                </di>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>

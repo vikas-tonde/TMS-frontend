@@ -128,7 +128,7 @@ const SideBar = ({ children }) => {
 
   return (
     <>
-      <div className="flex h-screen bg-gray-200">
+      <div className="flex h-auto">
         <motion.div
           animate={{
             width: isOpen ? "200px" : "45px",
@@ -138,8 +138,10 @@ const SideBar = ({ children }) => {
               type: "spring",
               damping: 10,
             },
+        
           }}
-          className={`sidebar bg-[#0A1C3E] text-white flex flex-col `}
+          className={`sidebar bg-[#0A1C3E] text-white flex flex-col min-h-screen `}
+        
         >
           <div className="flex flex-none items-center justify-between p-4">
             <AnimatePresence>

@@ -6,7 +6,11 @@ function Layout() {
         <>
             <div className='flex'>
                 <SideBar />
-                <Outlet></Outlet>
+
+                <div className="flex-grow overflow-y-auto">
+                    <Outlet></Outlet>
+                </div>
+
             </div>
         </>
     )
