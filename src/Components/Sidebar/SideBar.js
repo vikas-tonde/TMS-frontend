@@ -47,7 +47,7 @@ const SideBar = ({ children }) => {
     hidden: {
       opacity: 1,
       padding: "5px 15px",
-      width: "400px",
+      width: "180px",
       transition: {
         duration: 0.9,
       },
@@ -55,7 +55,7 @@ const SideBar = ({ children }) => {
     show: {
       opacity: 1,
       padding: "5px 15px",
-      width: "400px",
+      width: "180px",
       transition: {
       duration: 0.9,
 
