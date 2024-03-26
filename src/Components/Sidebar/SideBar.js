@@ -11,7 +11,7 @@ const routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    icon: <FaHome />,
+    icon: <FaHome/>,
   },
   {
     path: "/users",
@@ -29,58 +29,7 @@ const routes = [
     name: "Graphs",
     icon: <BiAnalyse />,
   },
-  {
-    path: "/file-manager",
-    name: "Location",
-    icon: <AiTwotoneFileExclamation />,
-    subRoutes: [
-      {
-        path: "/settings/profile",
-        name: "Pune",
-        icon: <FaUser />,
-      },
-      {
-        path: "/settings/2fa",
-        name: "Germany",
-        icon: <FaLock />,
-      },
-      {
-        path: "/settings/billing",
-        name: "Bangalore",
-        icon: <FaMoneyBill />,
-      },
-      {
-        path: "/settings/hydrabad",
-        name: "Hyderabad",
-        icon: <FaMoneyBill />,
-
-      },
-    ],
-  },
   
-  {
-    path: "/settings",
-    name: "Settings",
-    icon: <BiCog />,
-    exact: true,
-    subRoutes: [
-      {
-        path: "/settings/profile",
-        name: "Profile ",
-        icon: <FaUser />,
-      },
-      {
-        path: "/settings/2fa",
-        name: "2FA",
-        icon: <FaLock />,
-      },
-      {
-        path: "/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
-      },
-    ],
-  },
   {
     path: "/Feedback Form",
     name: "Feedback Form",
@@ -94,10 +43,11 @@ const SideBar = ({ children }) => {
   const toggle = () => setIsOpen(!isOpen);
   const inputAnimation = {
     hidden: {
-      width: 0,
+      width: "20px",
       padding: 0,
       transition: {
         duration: 0.2,
+       
       },
     },
     show: {
@@ -111,27 +61,30 @@ const SideBar = ({ children }) => {
 
   const showAnimation = {
     hidden: {
-      width: 0,
-      opacity: 0,
+      opacity: 1,
+      padding: "5px 15px",
+      width: "400px",
       transition: {
-        duration: 0.5,
+        duration: 0.9,
       },
     },
     show: {
       opacity: 1,
-      width: "auto",
+      padding: "5px 15px",
+      width: "400px",
       transition: {
-        duration: 0.5,
+      duration: 0.9,
+
       },
     },
   };
 
   return (
     <>
-      <div className="flex h-auto">
+      <div className=" sticky top-0 h-screen ">
         <motion.div
           animate={{
-            width: isOpen ? "200px" : "45px",
+            width: isOpen ? "250px" : "50px",
 
             transition: {
               duration: 0.5,
@@ -140,10 +93,10 @@ const SideBar = ({ children }) => {
             },
         
           }}
-          className={`sidebar bg-[#0A1C3E] text-white flex flex-col min-h-screen `}
+          className={`sidebar bg-[#0A1C3E] text-white flex flex-col min-h-screen`}
         
         >
-          <div className="flex flex-none items-center justify-between p-4">
+          <div className="flex flex-none content-center justify-between p-4">
             <AnimatePresence>
               {isOpen && (
                 <motion.h1
@@ -158,31 +111,14 @@ const SideBar = ({ children }) => {
               )}
             </AnimatePresence>
 
-            <div className="bars">
+            <div className="bars ">
               <FaBars onClick={toggle} />
             </div>
           </div>
-          <div className="flex items-center bg-gray-200 rounded p-2">
-            <div className="mr-2">
-              <BiSearch />
-            </div>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.input
-                  initial="hidden"
-                  animate="show"
-                  exit="hidden"
-                  variants={inputAnimation}
-                  type="text"
-                  placeholder="Search"
-                  className="bg-transparent outline-none"
-                />
-              )}
-            </AnimatePresence>
-          </div>
+          
 
           <section className="routes">
-            <div className="flex flex-col flex-wrap justify-between items-start overflow-y-auto">
+            <div className="flex flex-col flex-wrap justify-between items-start ">
               {routes.map((route, index) => {
                 if (route.subRoutes) {
                   return (
@@ -203,8 +139,8 @@ const SideBar = ({ children }) => {
                     className="link"
                     activeClassName="active"
                   >
-                    <div className="flex items-center p-2">
-                      <div className="mr-2">{route.icon}</div>
+                    <div className="flex items-center p-4">
+                      <div className="mr-4">{route.icon}</div>
                       <div>
                         <AnimatePresence>
                           {isOpen && (
