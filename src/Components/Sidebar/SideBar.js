@@ -16,24 +16,24 @@ const routes = [
     icon: <FaHome/>,
   },
   {
-    path: "/users",
+    path: "/profile",
     name: "Personal Information",
     icon: <FaUser />,
     
   },
   {
-    path: "/messages",
+    path: "/exams",
     name: "Exams",
     icon: <MdMessage />,
   },
   {
-    path: "/analytics",
+    path: "/graph",
     name: "Graphs",
     icon: < AiFillPieChart />,
   },
   
   {
-    path: "/Feedback Form",
+    path: "/logout",
     name: "Log out",
     icon: <FaSignOutAlt />,
   },
@@ -92,7 +92,7 @@ const SideBar = ({ children }) => {
                   exit="hidden"
                   className="logo"
                 >
-                  Admin
+          Trainee Dashboard
                 </motion.h1>
               )}
             </AnimatePresence>

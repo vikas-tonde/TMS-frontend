@@ -1,35 +1,42 @@
-import { NavLink } from "react-router-dom";
-import { FaBars, FaHome,FaUser } from "react-icons/fa";
-import { MdMessage } from "react-icons/md";
 import { BiAnalyse } from "react-icons/bi";
+import { FaBars, FaUser } from "react-icons/fa";
+import { MdMessage } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 
-import { AiFillHeart } from "react-icons/ai";
-import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { AiFillHeart } from "react-icons/ai";
+import { FaSignOutAlt } from "react-icons/fa";
 import SidebarMenu from "./SidebarMenu";
 const routes = [
   
   {
-    path: "/users",
+    path: "/trainee/profile",
     name: "Personal Information",
     icon: <FaUser />,
     
   },
   {
-    path: "/messages",
+    path: "/trainee/exams",
     name: "Exams",
     icon: <MdMessage />,
   },
   {
-    path: "/analytics",
+    path: "/trainee/assignment",
     name: "Assignment Status",
     icon: <BiAnalyse />,
   },
   
   {
-    path: "/Feedback Form",
+    path: "/presentationstatus",
     name: "Presentation Status",
     icon: <AiFillHeart />,
+  },
+
+  {
+    path: "/logout",
+    name: "Log out",
+    icon: <FaSignOutAlt />,
   },
 ];
 
@@ -86,7 +93,7 @@ const TranieeSidebar = ({ children }) => {
                   exit="hidden"
                   className="logo"
                 >
-                  Admin
+                Trainee Dashboard
                 </motion.h1>
               )}
             </AnimatePresence>
