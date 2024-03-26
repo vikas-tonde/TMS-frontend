@@ -27,9 +27,6 @@ function App() {
       navigate("/login", { replace: true, state: "Please login first.." });
     }
   }
-  useEffect(() => {
-    handleRefresh();
-  })
 
   return (
 
@@ -44,6 +41,7 @@ function App() {
            * TODO: Make group of all admin routes and user routes below
           */}
         <Route element={<RequireAuth> <Layout/> </RequireAuth>}>
+
           <Route path="/dashboard" element={ <Dashboard /> } />
           <Route path="/users" element={ <Users /> } />
           <Route path="/messages" element={<Messages /> } />
