@@ -1,4 +1,4 @@
-import LineGraph from "./LineGraph";
+import LineGraph from "../Components/LineGraph";
 
 
 const Presentation = () => {
