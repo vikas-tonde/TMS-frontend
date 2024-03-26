@@ -10,9 +10,7 @@ import FileManager from "./Pages/FileManager";
 import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
 import Messages from "./Pages/Messages";
-import Order from "./Pages/Order";
 import Saved from "./Pages/Saved";
-import Setting from "./Pages/Setting";
 import Users from "./Pages/Users";
 import api from './authService/api';
 import { RequireAuth, useAuth } from './authService/auth';
@@ -51,10 +49,12 @@ function App() {
           <Route path="/messages" element={<Messages /> } />
           <Route path="/analytics" element={ <Analytics /> } />
           <Route path="/file-manager" element={<FileManager /> } />
-          <Route path="/order" element={<Order /> } />
+       
           <Route path="/saved" element={<Saved /> } />
-          <Route path="/settings" element={<Setting /> } />
+        
+
         </Route>
+
       </Routes>
     </>
   );

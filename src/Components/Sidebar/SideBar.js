@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome,FaUser } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
-import { BiAnalyse } from "react-icons/bi";
+import { AiFillPieChart } from 'react-icons/ai';
 
-import { AiFillHeart } from "react-icons/ai";
+
+import { FaSignOutAlt } from 'react-icons/fa';
+
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -27,13 +29,13 @@ const routes = [
   {
     path: "/analytics",
     name: "Graphs",
-    icon: <BiAnalyse />,
+    icon: < AiFillPieChart />,
   },
   
   {
     path: "/Feedback Form",
-    name: "Feedback Form",
-    icon: <AiFillHeart />,
+    name: "Log out",
+    icon: <FaSignOutAlt />,
   },
 ];
 
