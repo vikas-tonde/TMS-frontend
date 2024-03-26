@@ -4,8 +4,9 @@ import StatisticsTabsMenu from "./StatisticsTabsMenu";
 const Dashboard = () => {
   return (
     <>
-      <div className="flex-1">
-        <h1 className="py-4">This is dashboard</h1>
+      <div className="flex-1" >
+      <h1 class="pt-5 pl-5 pr-10 font-extrabold text-3xl font-serif">Dashboard</h1>
+
         <StatisticsTabsMenu />
       </div>
     </>

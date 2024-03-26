@@ -52,7 +52,7 @@ const Users = () => {
   return (  
     <>
     {/* <Space size={20} direction="vertical"></Space> */}
-    <div className="title"> Personal Infomation</div>
+    <h1 class="pt-5 pl-5 pr-10 font-extrabold text-3xl font-serif">Personal Information</h1>
 
     <div className="flex place-items-center justify-center p-3 w-100">
         <div className="flex items-center mx-10">

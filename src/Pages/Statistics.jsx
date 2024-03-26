@@ -3,7 +3,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import Selector from "./Selector";
 const Statistics = ({ location }) => {
   
   const settings = {
@@ -26,7 +26,9 @@ const Statistics = ({ location }) => {
 
   return (
     <>
+       < Selector/>
       <div className="flex items-center justify-center mt-8 mb-5">
+      
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="items-center">
             <h2 className="text-lg font-semibold text-center py-2 text-[#0A1C3E] ">Toppers</h2>
