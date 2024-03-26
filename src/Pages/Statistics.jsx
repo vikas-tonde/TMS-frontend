@@ -3,7 +3,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Selector from "./Selector";
+import Selector from "../Components/Selector";
 const Statistics = ({ location }) => {
   
   const settings = {
