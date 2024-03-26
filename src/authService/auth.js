@@ -36,7 +36,6 @@ export function useAuth() {
 
 export function RequireAuth({ children }) {
     let auth = useAuth();
-    let location = useLocation();
     let handleRefresh = async () => {
         let response = await api.get("/api/users/");
         let { data } = response.data;

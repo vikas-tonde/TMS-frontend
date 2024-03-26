@@ -29,7 +29,7 @@ const HistoricDataMenu = () => {
       }),
   ];
   const [data] = useState(() => []);
-  const [globalFilter, setGlobalFilter] = useState("");
+  const [globalFilter] = useState("");
   
   const [search, setsearch] = useState("");
 

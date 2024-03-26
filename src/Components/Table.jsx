@@ -55,7 +55,6 @@ const Table = () => {
     { srno: 5, empId: 'T50494', name: "Trupti", avgMarks: 25 },
   ]
 
-
   return (
     <>
       <div className=" mx-auto max-w-full md:p-3 2xl:p-6">

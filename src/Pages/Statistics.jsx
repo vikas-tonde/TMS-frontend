@@ -4,8 +4,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const Statistics = () => {
-
+const Statistics = ({ location }) => {
+  
   const settings = {
     dots: true,
     infinite: true,
@@ -17,12 +17,12 @@ const Statistics = () => {
   };
 
   const [entries] = useState([
-   { name: "Vikas Tonde", email: "vikas.tonde@intelizign.com", score: 92 },
-   { name: "Shivkanya Doiphode", email: "shivkanya.doiphode@intelizign.com", score: 90 },
-   { name: "Rishi Rathod", email: "rishi.rathod@intelizign.com", score: 88 },
-   { name: "Rutika Vale", email: "rutika.vale@intelizign.com", score: 87 },
-   { name: "Trupti Panhale", email: "trupti.panhale@intelizign.com", score: 85 },
- ]);
+    { name: "Vikas Tonde", email: "vikas.tonde@intelizign.com", score: 92 },
+    { name: "Shivkanya Doiphode", email: "shivkanya.doiphode@intelizign.com", score: 90 },
+    { name: "Rishi Rathod", email: "rishi.rathod@intelizign.com", score: 88 },
+    { name: "Rutika Vale", email: "rutika.vale@intelizign.com", score: 87 },
+    { name: "Trupti Panhale", email: "trupti.panhale@intelizign.com", score: 85 },
+  ]);
 
   return (
     <>
@@ -93,8 +93,8 @@ const Statistics = () => {
           </div>
         </div>
       </div>
-       </>
-       );
+    </>
+  );
 };
 
 

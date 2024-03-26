@@ -1,23 +1,21 @@
 import React, { useEffect } from 'react';
-import "./index.css";
+import { Route, Routes } from 'react-router-dom';
 import Dashboard from "./Pages/Dashboard";
-import { Routes, Route } from 'react-router-dom';
+import "./index.css";
 
-import Users from "./Pages/Users";
-import Messages from "./Pages/Messages";
-import FileManager from "./Pages/FileManager";
+import { useNavigate } from 'react-router-dom/dist/umd/react-router-dom.development';
+import Layout from './Components/Layout';
 import Analytics from "./Pages/Analytics";
+import FileManager from "./Pages/FileManager";
+import Homepage from './Pages/HomePage';
+import Login from './Pages/LoginPage';
+import Messages from "./Pages/Messages";
 import Order from "./Pages/Order";
 import Saved from "./Pages/Saved";
 import Setting from "./Pages/Setting";
-import Homepage from './Pages/HomePage';
-import Login from './Pages/LoginPage';
-import SideBar from "./Components/Sidebar/SideBar";
-import TraineeSideBar from "./Components/Sidebar/TranieeSidebar";
-import { AuthProvider, RequireAuth, useAuth } from './authService/auth';
+import Users from "./Pages/Users";
 import api from './authService/api';
-import { useNavigate } from 'react-router-dom/dist/umd/react-router-dom.development';
-import Layout from './Components/Layout';
+import { RequireAuth, useAuth } from './authService/auth';
 function App() {
   let navigate = useNavigate();
   let auth = useAuth();
@@ -33,7 +31,7 @@ function App() {
   }
   useEffect(() => {
     handleRefresh();
-  }, [])
+  })
 
   return (
 
