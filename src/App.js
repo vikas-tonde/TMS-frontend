@@ -10,9 +10,7 @@ import FileManager from "./Pages/FileManager";
 import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
 import Messages from "./Pages/Messages";
-import Order from "./Pages/Order";
 import Saved from "./Pages/Saved";
-import Setting from "./Pages/Setting";
 import Users from "./Pages/Users";
 import api from './authService/api';
 import { RequireAuth, useAuth } from './authService/auth';
@@ -29,9 +27,12 @@ function App() {
       navigate("/login", { replace: true, state: "Please login first.." });
     }
   }
+<<<<<<< HEAD
   // useEffect(() => {
   //   handleRefresh();
   // })
+=======
+>>>>>>> b38c8ba73fd5a524b890e0dc6b0b9b01b7869a56
 
   return (
 
@@ -46,15 +47,18 @@ function App() {
            * TODO: Make group of all admin routes and user routes below
           */}
         <Route element={<RequireAuth> <Layout/> </RequireAuth>}>
+
           <Route path="/dashboard" element={ <Dashboard /> } />
           <Route path="/users" element={ <Users /> } />
           <Route path="/messages" element={<Messages /> } />
           <Route path="/analytics" element={ <Analytics /> } />
           <Route path="/file-manager" element={<FileManager /> } />
-          <Route path="/order" element={<Order /> } />
+       
           <Route path="/saved" element={<Saved /> } />
-          <Route path="/settings" element={<Setting /> } />
+        
+
         </Route>
+
       </Routes>
     </>
   );
