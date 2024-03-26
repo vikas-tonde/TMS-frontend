@@ -29,9 +29,9 @@ function App() {
       navigate("/login", { replace: true, state: "Please login first.." });
     }
   }
-  useEffect(() => {
-    handleRefresh();
-  })
+  // useEffect(() => {
+  //   handleRefresh();
+  // })
 
   return (
 
