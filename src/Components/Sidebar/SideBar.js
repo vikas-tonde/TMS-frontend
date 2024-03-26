@@ -92,7 +92,7 @@ const SideBar = ({ children }) => {
                   exit="hidden"
                   className="logo"
                 >
-          Trainee Dashboard
+          Admin Dashboard
                 </motion.h1>
               )}
             </AnimatePresence>
