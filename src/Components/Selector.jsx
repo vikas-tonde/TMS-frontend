@@ -16,7 +16,7 @@ const Selector = () => {
       });
   }, []);
   return (
-    <div className="w-72  mr-5 font-medium outline outline-2 outline-offset-2 rounded-lg" >
+    <div className="w-72 m-5 font-medium outline outline-2 outline-offset-2 rounded-lg" >
       <div
         onClick={() => setOpen(!open)}
         className={`bg-white w-full p-2 flex items-center justify-between rounded ${

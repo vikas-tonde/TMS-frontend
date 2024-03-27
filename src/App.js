@@ -13,6 +13,7 @@ import Messages from "./Pages/Messages";
 import TraineeExamDetails from "./Pages/TraineeExamDetails";
 import Users from "./Pages/Users";
 import { RequireAuth } from './authService/auth';
+import TraineeInfo from './Components/TraineeInfo'
 import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/exams" element={<BulkEntryModuleForm />} />
             <Route path="/graph" element={<Analytics />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/table/:empId" element={<TraineeInfo />} />
           </Route>
 
           <Route element={<RequireAuth> <TraineeLayout /> </RequireAuth>}>

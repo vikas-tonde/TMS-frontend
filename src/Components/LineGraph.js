@@ -54,7 +54,7 @@ const LineGraph = () => {
     return (
         <>
             <div className='pt-16 '>
-                <ReactApexChart options={options} series={series} type="line" height={500} width={650} />
+                <ReactApexChart options={options} series={series} type="line" height={600} width={750} />
             </div>
         </>
     )

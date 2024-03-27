@@ -17,8 +17,14 @@ export function AuthProvider({ children }) {
         }
         else {
             setUser(data.user);
-            let to = location.state?.from?.pathname || "/dashboard";
-            navigate(to, { replace: true, state: "Login success" });
+            if(user.role=='Admin'){
+                let to = location.state?.from?.pathname || "/dashboard";
+                navigate(to, { replace: true, state: "Login success" });
+            }
+            if(user.role=='Admin'){
+                let to = location.state?.from?.pathname || "/trainee";
+                navigate(to, { replace: true, state: "Login success" });
+            }
         }
     };
 
