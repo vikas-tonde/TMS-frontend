@@ -10,12 +10,15 @@ import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
 import Logout from "./Pages/Logout";
 import Messages from "./Pages/Messages";
+import { useHistory } from 'react-router-dom';
+
 import TraineeExamDetails from "./Pages/TraineeExamDetails";
 import Users from "./Pages/Users";
 import { RequireAuth } from './authService/auth';
 import TraineeInfo from './Components/TraineeInfo'
 import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
+import Userdelete from './Pages/Userdelete';
 function App() {
   return (
 
@@ -47,7 +50,7 @@ function App() {
 
             <Route path="/trainee" element={<>This is trainee dashboard</>} />
             <Route path="/trainee/profile" element={<Users />} />
-            <Route path="/trainee/exams" element={<TraineeExamDetails />} />
+            <Route path="/trainee/exams" element={<Userdelete />} />
             <Route path="/trainee/assignments" element={<AssignmentStatus />} />
 
             <Route path="/logout" element={<Logout />} />
