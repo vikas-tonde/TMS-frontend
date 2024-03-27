@@ -16,10 +16,10 @@ const Selector = () => {
       });
   }, []);
   return (
-    <div className="w-72  mr-5 font-medium outline outline-2 outline-offset-2 " >
+    <div className="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800 " >
       <div
         onClick={() => setOpen(!open)}
-        className={`bg-white w-full p-2 flex items-center justify-between rounded ${
+        className={`bg-white w-full flex items-center justify-between rounded ${
           !selected && "text-gray-700"
         }`}
       >
@@ -30,11 +30,12 @@ const Selector = () => {
           : "Select Module Name"}
         <BiChevronDown size={20} className={`${open && "rotate-180"}`} />
       </div>
-      <ul
-        className={`bg-white mt-2 overflow-y-auto ${
-          open ? "max-h-60" : "max-h-0"
-        } `}
-      >
+      <ul className={`bg-white mt-4 overflow-y-auto absolute z-10 ${
+        open ? "max-h-60 transition-max-height duration-300 ease-in-out border border-gray-400 rounded-sm" : "max-h-0 transition-max-height duration-300 ease-in-out border-none"
+      }`}>
+
+
+
         <div className="flex items-center px-2 sticky top-0 bg-white">
           <AiOutlineSearch size={18} className="text-gray-700" />
           <input
