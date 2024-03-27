@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
-
+import { Link } from "react-router-dom";
 
 const Table = () => {
 
@@ -24,13 +24,22 @@ const Table = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Average Marks",
     }),
+    columnHelper.accessor("", {
+      id: "empId",
+      cell: (info) => {
+        const empId = info.row.original.empId;
+        const slug = empId; 
+        return <Link to={`/traineeInfo/${slug}`}>Edit</Link>;
+      },
+      header: "",
+    }),
   ];
   const [data] = useState([
-    { srno: 1, empId: 'T50477', name: "Rishi", avgMarks: 12 },
-    { srno: 2, empId: 'T50498', name: "Vikas", avgMarks: 11 },
-    { srno: 3, empId: 'T50481', name: "Rutika", avgMarks: 10 },
-    { srno: 4, empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
-    { srno: 5, empId: 'T50494', name: "Trupti", avgMarks: 25 },
+    { srno: 1, empId: 'T50477', name: "Rishi Rathod", avgMarks: 12 },
+    { srno: 2, empId: 'T50498', name: "Vikas Tonde", avgMarks: 11 },
+    { srno: 3, empId: 'T50481', name: "Rutika Vale", avgMarks: 10 },
+    { srno: 4, empId: 'T50482', name: "Shivkanya Doiphode", avgMarks: 19 },
+    { srno: 5, empId: 'T50494', name: "Trupti Panhale", avgMarks: 25 },
   ]);
   const [globalFilter] = useState("");
 
@@ -47,13 +56,6 @@ const Table = () => {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  const data2 = [
-    { srno: 1, empId: 'T50477', name: "Rishi", avgMarks: 12 },
-    { srno: 2, empId: 'T50498', name: "Vikas", avgMarks: 11 },
-    { srno: 3, empId: 'T50481', name: "Rutika", avgMarks: 10 },
-    { srno: 4, empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
-    { srno: 5, empId: 'T50494', name: "Trupti", avgMarks: 25 },
-  ]
 
   return (
     <>
@@ -66,7 +68,6 @@ const Table = () => {
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
             </svg>
             <input
-              
               type="search"
               onChange={(e) => { setsearch(e.target.value) }}
               className="h-8 px-4 py-1 w-1/3 text-gray-800 focus:outline-none"
@@ -91,14 +92,14 @@ const Table = () => {
             ))}
           </thead>
           <tbody>
-            {data2.length ? (
-              data2.filter((item) => {
+            {data.length ? (
+              data.filter((item) => {
                 return search.toLowerCase() === '' ? item : item.empId.toLowerCase().includes(search) || item.name.toLowerCase().includes(search)
               }).map((row, i) => (
                 <tr
                   key={row.srno}
                   className={`
-                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-neutral-200 
+                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-gray-300 
                   `}
                 >
                   {Object.entries(row).map(([key, value]) => (
@@ -106,6 +107,13 @@ const Table = () => {
                       {value}
                     </td>
                   ))}
+                  <td key="edit" className="px-4 py-2">
+                    <Link to={`/dashboard/${row.empId}`}>
+                      <button className="bg-blue text-white font-bold py-2 px-4 rounded" >
+                        View
+                      </button>
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
