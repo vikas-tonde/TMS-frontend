@@ -20,11 +20,8 @@ import Batch from './Pages/Batch'
 import BatchTable from "./Components/BatchTable";
 import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
-<<<<<<< HEAD
 import Userdelete from './Pages/Userdelete';
-=======
 import TraineeExamData from './Components/TraineeExamData';
->>>>>>> a6180703e761ea48612bf339be9da43ee4f05ae2
 function App() {
   return (
 
