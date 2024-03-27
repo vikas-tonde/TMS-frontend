@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
     let signin = async (values, actions) => {
         let response = await api.post(`/api/users/login`, values);
         let { data } = response.data;
+        console.log("Data:",data.user);
         actions.resetForm();
         if (data?.user === null || data?.user === undefined) {
             setUser(null);
@@ -17,11 +18,12 @@ export function AuthProvider({ children }) {
         }
         else {
             setUser(data.user);
-            if(user.role=='Admin'){
+            console.log("user:",user);
+            if(data?.user?.role==="Admin"){
                 let to = location.state?.from?.pathname || "/dashboard";
                 navigate(to, { replace: true, state: "Login success" });
             }
-            if(user.role=='Admin'){
+            if(data?.user?.role==="Trainee"){
                 let to = location.state?.from?.pathname || "/trainee";
                 navigate(to, { replace: true, state: "Login success" });
             }
