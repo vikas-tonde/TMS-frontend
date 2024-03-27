@@ -6,6 +6,9 @@ import React from "react";
 export default function TraineeExamData() {
   return (
     <>
+     <div className="flex items-center justify-items-center mb-10">
+                <h1 className='text-4xl  font-semibold m-5 w-full text-center'>Add Trainee Exam Data for Single User</h1>
+            </div>
       <div className="w-full flex justify-center m-10">
       <form className="w-full flex justify-center ">
         <div className="flex-col">

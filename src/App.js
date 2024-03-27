@@ -21,7 +21,7 @@ import BatchTable from "./Components/BatchTable";
 import SingleEntryUser from "./Pages/SingleEntryUser";
 import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
-import Userdelete from './Pages/Userdelete';
+import TraineeTable from './Components/TraineeTable';
 import TraineeExamData from './Components/TraineeExamData';
 function App() {
   return (
@@ -38,20 +38,26 @@ function App() {
           */}
         <Route element={<RequireAuth> <MasterLayout /> </RequireAuth>}>
           <Route element={<AdminLayout />}>
-
+             {/**
+           * Please Don't Change any exising Route.
+           * You can Add your Route for testing purpose.
+            */ }
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Users />} />
             <Route path="/exams" element={<Messages />} />
-            
+            <Route path="/exams/single" element={<TraineeExamData />} />
+
             <Route path="/trainees/singleentry" element={<SingleEntryUser />} />
             <Route path="/trainees/bulkentry" element={<BulkEntryModuleForm />} />
+            <Route path="/trainees/alltrainees" element={<TraineeTable />} />
+
          
             <Route path="/batch" element={<BatchTable />} />
             <Route path="/batch/:batchName" element={<Batch />} />
             <Route path="/graph" element={<Analytics />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/table/:empId" element={<TraineeInfo />} />
-            <Route path="/TraineeExamData" element={<TraineeExamData />} />
+            
           </Route>
 
           <Route element={<RequireAuth> <TraineeLayout /> </RequireAuth>}>
@@ -61,7 +67,7 @@ function App() {
 
             <Route path="/trainee" element={<>This is trainee dashboard</>} />
             <Route path="/trainee/profile" element={<Users />} />
-            <Route path="/trainee/exams" element={<Userdelete />} />
+            <Route path="/trainee/exams" element={<TraineeTable />} />
             <Route path="/trainee/assignments" element={<AssignmentStatus />} />
 
             <Route path="/logout" element={<Logout />} />
