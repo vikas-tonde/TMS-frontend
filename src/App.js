@@ -18,6 +18,7 @@ import Batch from './Pages/Batch'
 import BatchTable from "./Components/BatchTable";
 import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
+import TraineeExamData from './Components/TraineeExamData';
 function App() {
   return (
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/graph" element={<Analytics />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/table/:empId" element={<TraineeInfo />} />
+            <Route path="/TraineeExamData" element={<TraineeExamData />} />
           </Route>
 
           <Route element={<RequireAuth> <TraineeLayout /> </RequireAuth>}>
