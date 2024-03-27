@@ -53,6 +53,11 @@ const routes = [
         name: "Bulk Entry",
         icon: <FaUser />,
       },
+      {
+        path: "/trainees/alltrainees",
+        name: "All Trainees",
+        icon: <FaUser />,
+      },
     ],
   },
   {
