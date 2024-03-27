@@ -10,13 +10,26 @@ import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
 import Logout from "./Pages/Logout";
 import Messages from "./Pages/Messages";
+import { useHistory } from 'react-router-dom';
+
 import TraineeExamDetails from "./Pages/TraineeExamDetails";
 import Users from "./Pages/Users";
 import { RequireAuth } from './authService/auth';
+<<<<<<< HEAD
 import TraineeInfo from './Pages/TraineeInfo'
 import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 
+=======
+import TraineeInfo from './Components/TraineeInfo'
+import Batch from './Pages/Batch'
+import BatchTable from "./Components/BatchTable";
+import SingleEntryUser from "./Pages/SingleEntryUser";
+import "./index.css";
+import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
+import TraineeTable from './Components/TraineeTable';
+import TraineeExamData from './Components/TraineeExamData';
+>>>>>>> dc11c1d9ca01b8067cb1a7ed522a6b4b6f0e0c39
 function App() {
   return (
 
@@ -32,13 +45,30 @@ function App() {
           */}
         <Route element={<RequireAuth> <MasterLayout /> </RequireAuth>}>
           <Route element={<AdminLayout />}>
-
+             {/**
+           * Please Don't Change any exising Route.
+           * You can Add your Route for testing purpose.
+            */ }
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Users />} />
-            <Route path="/exams" element={<BulkEntryModuleForm />} />
+            <Route path="/exams" element={<Messages />} />
+            <Route path="/exams/single" element={<TraineeExamData />} />
+
+            <Route path="/trainees/singleentry" element={<SingleEntryUser />} />
+            <Route path="/trainees/bulkentry" element={<BulkEntryModuleForm />} />
+            <Route path="/trainees/alltrainees" element={<TraineeTable />} />
+
+         
+            <Route path="/batch" element={<BatchTable />} />
+            <Route path="/batch/:batchName" element={<Batch />} />
             <Route path="/graph" element={<Analytics />} />
             <Route path="/logout" element={<Logout />} />
+<<<<<<< HEAD
             <Route path="/dashboard/:traineeInfo" element={<TraineeInfo />} />
+=======
+            <Route path="/table/:empId" element={<TraineeInfo />} />
+            
+>>>>>>> dc11c1d9ca01b8067cb1a7ed522a6b4b6f0e0c39
           </Route>
 
           <Route element={<RequireAuth> <TraineeLayout /> </RequireAuth>}>
@@ -48,7 +78,7 @@ function App() {
 
             <Route path="/trainee" element={<>This is trainee dashboard</>} />
             <Route path="/trainee/profile" element={<Users />} />
-            <Route path="/trainee/exams" element={<TraineeExamDetails />} />
+            <Route path="/trainee/exams" element={<TraineeTable />} />
             <Route path="/trainee/assignments" element={<AssignmentStatus />} />
 
             <Route path="/logout" element={<Logout />} />

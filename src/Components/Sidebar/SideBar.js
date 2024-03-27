@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaBars, FaHome,FaUser } from "react-icons/fa";
+import { FaBars, FaHome,FaUser} from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { AiFillPieChart } from 'react-icons/ai';
 
@@ -25,13 +25,51 @@ const routes = [
     path: "/exams",
     name: "Exams",
     icon: <MdMessage />,
+    subRoutes: [
+      {
+        path: "/exams/single",
+        name: "Single Entry",
+        icon: <FaUser />,
+      },
+      {
+        path: "/exams/bulk",
+        name: "Bulk Entry",
+        icon: <FaUser />,
+      },
+    ],
+  },
+  {
+    path: "/trainees",
+    name: "Trainees Details",
+    icon: <MdMessage />,
+    subRoutes: [
+      {
+        path: "/trainees/singleentry",
+        name: "Single Entry",
+        icon: <FaUser />,
+      },
+      {
+        path: "/trainees/bulkentry",
+        name: "Bulk Entry",
+        icon: <FaUser />,
+      },
+      {
+        path: "/trainees/alltrainees",
+        name: "All Trainees",
+        icon: <FaUser />,
+      },
+    ],
   },
   {
     path: "/graph",
     name: "Graphs",
     icon: < AiFillPieChart />,
   },
-  
+  {
+    path: "/batch",
+    name: "Batch",
+    icon: <FaUser />,
+  },
   {
     path: "/logout",
     name: "Log out",
@@ -44,7 +82,6 @@ const SideBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   
-
   const showAnimation = {
     hidden: {
       opacity: 1,

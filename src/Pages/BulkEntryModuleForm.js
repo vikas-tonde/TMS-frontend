@@ -22,7 +22,14 @@ function BulkEntryModuleForm() {
                                 />
                             </div>
                         </div>
-                        <SelectorForTestDetails/>
+                        
+                        <div className="m-5 col-span-full flex items-center ">
+                            <label className="flex items-center justify-center text-gray-700 text-xl font-bold mt-1 mb-2 mr-24" >Module Name</label>
+                            <div className=" ">
+                            <SelectorForTestDetails/>
+                           
+                            </div>
+                        </div>
                         <div className="m-5 col-span-full flex items-center ">
                             <label className="flex items-center justify-center text-gray-700 text-xl font-bold mt-1 mb-2 mr-20" >Module Name</label>
                             <div className=" pl-2">

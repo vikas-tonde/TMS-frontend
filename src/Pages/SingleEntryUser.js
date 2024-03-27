@@ -74,6 +74,9 @@ const Form = () => {
     
   return (
     <>
+    <div className="flex items-center justify-items-center mb-10">
+                <h1 className='text-4xl  font-semibold m-5 w-full text-center'>Add Single Entry of User</h1>
+            </div>
           <div className="flex justify-center items-center w-full">
               <form className="w-full max-w-lg bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                   <div className="w-full px-3 ">
