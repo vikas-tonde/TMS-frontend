@@ -16,6 +16,7 @@ import { RequireAuth } from './authService/auth';
 import TraineeInfo from './Components/TraineeInfo'
 import Batch from './Pages/Batch'
 import BatchTable from "./Components/BatchTable";
+import SingleEntryUser from "./Pages/SingleEntryUser";
 import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 import TraineeExamData from './Components/TraineeExamData';
@@ -37,8 +38,8 @@ function App() {
 
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Users />} />
-            <Route path="/exams" element={<BulkEntryModuleForm />} />
-            <Route path="/message" element={<Messages />} />
+            <Route path="/exams" element={<Messages />} />
+            <Route path="/singleEntryUser" element={<SingleEntryUser />} />
             <Route path="/batch" element={<BatchTable />} />
             <Route path="/batch/:batchName" element={<Batch />} />
             <Route path="/graph" element={<Analytics />} />

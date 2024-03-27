@@ -49,60 +49,62 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
   }, [isOpen]);
   return (
     <>
-  <div className="menu flex flex-row justify-between items-center p-2" onClick={toggleMenu}>
-  <div className="menu_item flex items-center">
-    <div className="icon mr-2">{route.icon}</div>
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          variants={showAnimation}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-          className="link_text"
-        >
-          {route.name}
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </div>
-  {isOpen && (
-    <motion.div
-      animate={
-        isMenuOpen
-          ? {
-              rotate: -90,
+      <div className="menu flex items-center p-4" onClick={toggleMenu}>
+        <div className="menu_item flex items-center">
+          <div className="icon mr-2">{route.icon}</div>
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                variants={showAnimation}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                className="link_text"
+              >
+                {route.name}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        {isOpen && (
+          <motion.div
+            animate={
+              isMenuOpen
+                ? {
+                    rotate: -90,
+                  }
+                : { rotate: 0 }
             }
-          : { rotate: 0 }
-      }
-    >
-      <div className="ml-2">
-      <FaAngleDown />
+          >
+            <div className="ml-2">
+              <FaAngleDown />
+            </div>
+          </motion.div>
+        )}
       </div>
-    </motion.div>
-  )}
-</div>
-<AnimatePresence>
-  {isMenuOpen && (
-    <motion.div
-      variants={menuAnimation}
-      initial="hidden"
-      animate="show"
-      exit="hidden"
-      className="menu_container p-2"
-    >
-      {route.subRoutes.map((subRoute, i) => (
-        <motion.div variants={menuItemAnimation} key={i} custom={i}>
-          <NavLink to={subRoute.path} className="link flex items-center px-2 py-1">
-            <div className="icon mr-2">{subRoute.icon}</div>
-            <motion.div className="link_text">{subRoute.name}</motion.div>
-          </NavLink>
-        </motion.div>
-      ))}
-    </motion.div>
-  )}{" "}
-</AnimatePresence>
-
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            variants={menuAnimation}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+            className="menu_container p-2"
+          >
+            {route.subRoutes.map((subRoute, i) => (
+              <motion.div variants={menuItemAnimation} key={i} custom={i}>
+                <NavLink
+                  to={subRoute.path}
+                  className="link flex items-center px-2 py-1 text-white hover:bg-gray-700"
+                >
+                  <div className="icon mr-2">{subRoute.icon}</div>
+                  <motion.div className="link_text">{subRoute.name}</motion.div>
+                </NavLink>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
