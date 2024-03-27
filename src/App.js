@@ -14,6 +14,7 @@ import TraineeExamDetails from "./Pages/TraineeExamDetails";
 import Users from "./Pages/Users";
 import { RequireAuth } from './authService/auth';
 import "./index.css";
+import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 function App() {
   return (
 
@@ -32,7 +33,7 @@ function App() {
 
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Users />} />
-            <Route path="/exams" element={<Messages />} />
+            <Route path="/exams" element={<BulkEntryModuleForm />} />
             <Route path="/graph" element={<Analytics />} />
             <Route path="/logout" element={<Logout />} />
           </Route>

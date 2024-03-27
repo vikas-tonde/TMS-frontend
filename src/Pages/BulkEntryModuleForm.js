@@ -1,3 +1,4 @@
+import SelectorForTestDetails from "./SelectorForTestDetails";
 
 
 function BulkEntryModuleForm() {
@@ -10,7 +11,18 @@ function BulkEntryModuleForm() {
             <form className="flex justify-center" >
                 <div className="space-y-8 ml-36">
                     <div className=" border-gray-900/10 ">
-                        
+                    <div className="m-5 col-span-full flex items-center ">
+                            <label className="flex items-center justify-center text-gray-700 text-xl font-bold mt-1 mb-2 mr-28" >Quiz Name</label>
+                            <div className=" pl-2">
+                                <input
+                                    type="text"
+                                    id="name" 
+                                    placeholder="Enter Quiz Name"
+                                    class="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+                                />
+                            </div>
+                        </div>
+                        <SelectorForTestDetails/>
                         <div className="m-5 col-span-full flex items-center ">
                             <label className="flex items-center justify-center text-gray-700 text-xl font-bold mt-1 mb-2 mr-20" >Module Name</label>
                             <div className=" pl-2">
