@@ -39,7 +39,10 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Users />} />
             <Route path="/exams" element={<Messages />} />
-            <Route path="/singleEntryUser" element={<SingleEntryUser />} />
+            
+            <Route path="/trainees/singleentry" element={<SingleEntryUser />} />
+            <Route path="/trainees/bulkentry" element={<BulkEntryModuleForm />} />
+
             <Route path="/batch" element={<BatchTable />} />
             <Route path="/batch/:batchName" element={<Batch />} />
             <Route path="/graph" element={<Analytics />} />

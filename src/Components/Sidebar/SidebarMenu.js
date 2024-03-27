@@ -71,7 +71,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
             animate={
               isMenuOpen
                 ? {
-                    rotate: -90,
+                    rotate: -180,
                   }
                 : { rotate: 0 }
             }
@@ -89,15 +89,15 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="menu_container p-2"
+            className="menu_container bg-[#102449] w-full p-2"
           >
             {route.subRoutes.map((subRoute, i) => (
               <motion.div variants={menuItemAnimation} key={i} custom={i}>
                 <NavLink
                   to={subRoute.path}
-                  className="link flex items-center px-2 py-1 text-white hover:bg-gray-700"
+                  className="link ml-8 flex items-center px-2 py-2 text-white hover:bg-gray-700"
                 >
-                  <div className="icon mr-2">{subRoute.icon}</div>
+                  <div className="icon mr-3">{subRoute.icon}</div>
                   <motion.div className="link_text">{subRoute.name}</motion.div>
                 </NavLink>
               </motion.div>

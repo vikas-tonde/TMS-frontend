@@ -39,6 +39,23 @@ const routes = [
     ],
   },
   {
+    path: "/trainees",
+    name: "Trainees Details",
+    icon: <MdMessage />,
+    subRoutes: [
+      {
+        path: "/trainees/singleentry",
+        name: "Single Entry",
+        icon: <FaUser />,
+      },
+      {
+        path: "/trainees/bulkentry",
+        name: "Bulk Entry",
+        icon: <FaUser />,
+      },
+    ],
+  },
+  {
     path: "/graph",
     name: "Graphs",
     icon: < AiFillPieChart />,
