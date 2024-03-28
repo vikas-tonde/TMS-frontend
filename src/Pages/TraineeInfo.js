@@ -1,8 +1,6 @@
-import Table from "../Components/Table";
-import axios from "axios";
-import { useEffect,useState } from "react";
+import { createColumnHelper, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
+import { useEffect, useState } from "react";
 import api from "../authService/api";
-import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 
 
 const TraineeInfo = () => {
@@ -13,7 +11,7 @@ const TraineeInfo = () => {
     // },[])
     useEffect(async() => {
         try {
-            let response = await api.get('api/admin//batches')
+            let response = await api.get('api/admin/batches')
             console.log(response.data.data[0].trainees);
         } catch (error) {
             console.log("Error Occuered during fetching")
