@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
-import { Link } from "react-router-dom";
 
 const Table = () => {
 
   const columnHelper = createColumnHelper();
 
   const columns = [
+    
     columnHelper.accessor("", {
       id: "srno",
       cell: (info) => <span>{info.row.index + 1}</span>,
@@ -24,26 +24,18 @@ const Table = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Average Marks",
     }),
-    columnHelper.accessor("", {
-      id: "empId",
-      cell: (info) => {
-        const empId = info.row.original.empId;
-        const slug = empId; 
-        return <Link to={`/traineeInfo/${slug}`}>Edit</Link>;
-      },
-      header: "",
-    }),
   ];
   const [data] = useState([
-    { srno: 1, empId: 'T50477', name: "Rishi Rathod", avgMarks: 12 },
-    { srno: 2, empId: 'T50498', name: "Vikas Tonde", avgMarks: 11 },
-    { srno: 3, empId: 'T50481', name: "Rutika Vale", avgMarks: 10 },
-    { srno: 4, empId: 'T50482', name: "Shivkanya Doiphode", avgMarks: 19 },
-    { srno: 5, empId: 'T50494', name: "Trupti Panhale", avgMarks: 25 },
+    {  empId: 'T50477', name: "Rishi", avgMarks: 12 },
+    {  empId: 'T50477', name: "Rishi", avgMarks: 12 },
+    { empId: 'T50498', name: "Vikas", avgMarks: 11 },
+    {  empId: 'T50481', name: "Rutika", avgMarks: 10 },
+    {  empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
+    { empId: 'T50494', name: "Trupti", avgMarks: 25 },
   ]);
   const [globalFilter] = useState("");
 
-  const [search, setsearch] = useState("");
+  const [search, setSearch] = useState("");
 
   const table = useReactTable({
     data,
@@ -56,6 +48,13 @@ const Table = () => {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const data2 = [
+    { empId: 'T50477', name: "Rishi", avgMarks: 12 },
+    {  empId: 'T50498', name: "Vikas", avgMarks: 11 },
+    {  empId: 'T50481', name: "Rutika", avgMarks: 10 },
+    { empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
+    {  empId: 'T50494', name: "Trupti", avgMarks: 25 },
+  ];
 
   return (
     <>
@@ -69,15 +68,20 @@ const Table = () => {
             </svg>
             <input
               type="search"
-              onChange={(e) => { setsearch(e.target.value) }}
+              onChange={(e) => { setSearch(e.target.value) }}
               className="h-8 px-4 py-1 w-1/3 text-gray-800 focus:outline-none"
               placeholder="Search Trainee by Id / Name"
               x-model="search" />
           </div>
         </div>
+        <div className="flex justify-end mr-6 mb-6">
+        <button type="button" className="inline-flex justify-center items-center px-4 py-2 border border-blue-600 shadow-sm text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+  De Activate
+</button>
 
+        </div>
         <table className="shadow-sm p-6 h-max w-full text-left mb-5 border-spacing-0" id="table-to-xls">
-          <thead className="bg-gray-300 p-3 h-16 ">
+          <thead className="bg-[#0A1C3E] text-white p-3 h-16 ">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -92,32 +96,29 @@ const Table = () => {
             ))}
           </thead>
           <tbody>
-            {data.length ? (
-              data.filter((item) => {
+            {data2.length ? (
+              data2.filter((item) => {
                 return search.toLowerCase() === '' ? item : item.empId.toLowerCase().includes(search) || item.name.toLowerCase().includes(search)
               }).map((row, i) => (
                 <tr
                   key={row.srno}
                   className={`
-<<<<<<< HEAD
-                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16
-=======
-                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-gray-300 
->>>>>>> 22382742d5c8af1b37ab71d2eccfd3d362907e38
+                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-neutral-200 
                   `}
                 >
+                  <td className="px-4 py-2">
+                    <input
+                      type="checkbox"
+                      // Assuming row.srno is unique
+                      value={row.srno}
+                      // Add your checkbox handler function here
+                    />
+                  </td>
                   {Object.entries(row).map(([key, value]) => (
                     <td key={key} className="px-4 py-2 ">
                       {value}
                     </td>
                   ))}
-                  <td key="edit" className="px-4 py-2">
-                    <Link to={`/dashboard/${row.empId}`}>
-                      <button className="bg-blue text-white font-bold py-2 px-4 rounded" >
-                        View
-                      </button>
-                    </Link>
-                  </td>
                 </tr>
               ))
             ) : (
@@ -127,43 +128,9 @@ const Table = () => {
             )}
           </tbody>
         </table>
-        {/* Pagination */}
-        <div className="flex items-center justify-end mt-2 gap-2">
-          <button
-            onClick={() => { table.previousPage() }}
-            disabled={!table.getCanPreviousPage()}
-            className="p-1 border-2 border-black disabled:opacity-30 px-2">{"<"}
-          </button>
-          <button
-            onClick={() => { table.nextPage() }}
-            disabled={!table.getCanNextPage()}
-            className="p-1 border-2 border-black disabled:opacity-30 px-2">{">"}
-          </button>
-          <span className="flex items-center gap-1">
-            <div>Page </div>
-            <strong>
-              {table.getState().pagination.pageIndex + 1} of{" "} {table.getPageCount() + 1}
-            </strong>
-          </span>
-          <span className="flex items-center gap-1">
-            | Go to Page :
-            <input
-              type="number"
-              className=" pl-2 w-10"
-              defaultValue={table.getState().pagination.pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                table.setPageIndex(page);
-              }}
-            ></input>
-          </span>
-
-        </div>
       </div>
-
     </>
   );
 };
-
 
 export default Table;

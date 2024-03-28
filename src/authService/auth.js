@@ -61,7 +61,6 @@ export function RequireAuth({ children }) {
             return <Navigate to="/login" state="Please login again.." replace />;
         }
     }
-
     return children;
 }
 

@@ -1,7 +1,7 @@
 // import { Space} from "antd";
 import {useState } from "react";
 
-const Users = () => {
+const UserDeActive = () => {
   const [password, setPassword] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -52,7 +52,7 @@ const Users = () => {
   return (  
     <>
     {/* <Space size={20} direction="vertical"></Space> */}
-    <h1 class="pt-5 pl-5 pr-10 font-extrabold text-3xl font-serif">Personal Information</h1>
+    <h1 class="pt-5 pl-5 pr-10 font-extrabold text-3xl font-serif">Employee Data</h1>
 
     <div className="flex place-items-center justify-center p-3 w-100">
         <div className="flex items-center mx-10">
@@ -171,8 +171,7 @@ const Users = () => {
             </div>
     
             <div className="grid justify-center items-center gap-2 md:flex md:flex-row">
-              <button className="text-[#0A1C3E] bg-white hover:text-white border border-[#0A1C3E] hover:bg-[#0A1C3E] hover:border-white focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-white dark:text-white dark:hover:text-[#0A1C3E]  dark:focus:ring-white]" variant="primary" onClick={handleEditClick} disabled={editMode}>Edit</button>
-              <button className="text-[#0A1C3E] bg-white hover:text-white border border-[#0A1C3E] hover:bg-[#0A1C3E] hover:border-white focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-white dark:text-white dark:hover:text-[#0A1C3E]  dark:focus:ring-white]" variant="primary" onClick={handleSubmit} type="submit" disabled={!editMode} >Submit</button>
+              <button className="text-gray-700 hover:text-white border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" variant="primary" onClick={handleSubmit} type="submit" disabled={!editMode}>DeActive User</button>
             </div>
           </form>
         </div>
@@ -181,4 +180,4 @@ const Users = () => {
   )
 };
 
-export default Users;
+export default UserDeActive;

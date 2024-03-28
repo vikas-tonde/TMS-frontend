@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import AdminLayout from './Components/Layouts/AdminLayout';
 import MasterLayout from './Components/Layouts/MasterLayout';
 import TraineeLayout from './Components/Layouts/TraineeLayout';
@@ -10,23 +10,25 @@ import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
 import Logout from "./Pages/Logout";
 import Messages from "./Pages/Messages";
-import TraineeExamDetails from "./Pages/TraineeExamDetails";
-import Users from "./Pages/Users";
+
+
 import { RequireAuth } from './authService/auth';
-import TraineeInfo from './Components/TraineeInfo'
 import "./index.css";
+<<<<<<< HEAD
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 import TraineeExamData from './Components/TraineeExamData';
 import TraineeExamTable from './Components/TraineeExamTable';
+=======
+
+
+
+>>>>>>> 22382742d5c8af1b37ab71d2eccfd3d362907e38
 function App() {
   return (
 
     <>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
 
+<<<<<<< HEAD
       <Routes>
         {/**
            * TODO: Make group of all admin routes and user routes below
@@ -58,6 +60,8 @@ function App() {
           </Route>
         </Route>
       </Routes>
+=======
+>>>>>>> 22382742d5c8af1b37ab71d2eccfd3d362907e38
     </>
   );
 }
