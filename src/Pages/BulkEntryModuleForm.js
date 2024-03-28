@@ -18,7 +18,7 @@ function BulkEntryModuleForm() {
                                     type="text"
                                     id="name" 
                                     placeholder="Enter Quiz Name"
-                                    class="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+                                    className="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
                                 />
                             </div>
                         </div>
@@ -37,7 +37,7 @@ function BulkEntryModuleForm() {
                                     type="text"
                                     id="name" 
                                     placeholder="Enter Module Name"
-                                    class="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+                                    className="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
                                 />
                             </div>
                         </div>
@@ -48,7 +48,7 @@ function BulkEntryModuleForm() {
                                     <input
                                         type="date"
                                         name="date"
-                                        class="shadow appearance-none box bg-white rounded-md h-9 w-96 py-2 px-3 ring-1 input ring-inset ring-gray-400  rounded-mb focus:outline-none focus:border-[#0A1C3E]"
+                                        className="shadow appearance-none box bg-white rounded-md h-9 w-96 py-2 px-3 ring-1 input ring-inset ring-gray-400  rounded-mb focus:outline-none focus:border-[#0A1C3E]"
                                     />
                                 </div>
                             </div>
@@ -61,7 +61,7 @@ function BulkEntryModuleForm() {
                                     name="marks"
                                     min="0"
                                     placeholder="Enter total Marks"
-                                    class="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+                                    className="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
                                 />
                             </div>
                         </div>

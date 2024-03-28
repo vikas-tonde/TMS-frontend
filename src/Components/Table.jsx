@@ -99,7 +99,7 @@ const Table = () => {
                 <tr
                   key={row.srno}
                   className={`
-                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-gray-300 
+                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-gray-200 
                   `}
                 >
                   {Object.entries(row).map(([key, value]) => (
@@ -109,7 +109,7 @@ const Table = () => {
                   ))}
                   <td key="edit" className="px-4 py-2">
                     <Link to={`/dashboard/${row.empId}`}>
-                      <button className="bg-blue text-white font-bold py-2 px-4 rounded" >
+                      <button className="bg-[#0A1C3E] text-white font-bold py-2 px-4 rounded" >
                         View
                       </button>
                     </Link>

@@ -15,13 +15,9 @@ import { useHistory } from 'react-router-dom';
 import TraineeExamDetails from "./Pages/TraineeExamDetails";
 import Users from "./Pages/Users";
 import { RequireAuth } from './authService/auth';
-<<<<<<< HEAD
 import TraineeInfo from './Pages/TraineeInfo'
 import "./index.css";
-import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 
-=======
-import TraineeInfo from './Components/TraineeInfo'
 import Batch from './Pages/Batch'
 import BatchTable from "./Components/BatchTable";
 import SingleEntryUser from "./Pages/SingleEntryUser";
@@ -29,7 +25,6 @@ import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 import TraineeTable from './Components/TraineeTable';
 import TraineeExamData from './Components/TraineeExamData';
->>>>>>> dc11c1d9ca01b8067cb1a7ed522a6b4b6f0e0c39
 function App() {
   return (
 
@@ -63,12 +58,9 @@ function App() {
             <Route path="/batch/:batchName" element={<Batch />} />
             <Route path="/graph" element={<Analytics />} />
             <Route path="/logout" element={<Logout />} />
-<<<<<<< HEAD
             <Route path="/dashboard/:traineeInfo" element={<TraineeInfo />} />
-=======
             <Route path="/table/:empId" element={<TraineeInfo />} />
             
->>>>>>> dc11c1d9ca01b8067cb1a7ed522a6b4b6f0e0c39
           </Route>
 
           <Route element={<RequireAuth> <TraineeLayout /> </RequireAuth>}>

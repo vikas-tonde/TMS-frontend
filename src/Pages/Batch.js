@@ -13,7 +13,7 @@ const Batch = () => {
 
         <>
           <div className="flex-1 m-10" >
-          <h1 class="pt-5 pl-5 pr-10 font-extrabold text-3xl font-serif">This is Batch Details</h1>
+          <h1 className="pt-5 pl-5 pr-10 font-extrabold text-3xl font-serif">This is Batch Details</h1>
 
           </div>
         </>
