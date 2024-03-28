@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 
 
-const TraineeTable = () => {
+const TraineeExamTable = () => {
 
   const columnHelper = createColumnHelper();
 
@@ -122,4 +122,4 @@ const TraineeTable = () => {
 };
 
 
-export default TraineeTable;
+export default TraineeExamTable;

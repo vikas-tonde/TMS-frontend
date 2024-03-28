@@ -17,7 +17,7 @@ import TraineeInfo from './Components/TraineeInfo'
 import "./index.css";
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 import TraineeExamData from './Components/TraineeExamData';
-import TraineeTable from './Components/TraineeTable';
+import TraineeExamTable from './Components/TraineeExamTable';
 function App() {
   return (
 
@@ -41,7 +41,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/table/:empId" element={<TraineeInfo />} />
             <Route path="/TraineeExamData" element={<TraineeExamData />} />
-            <Route path="/traineeTable" element={<TraineeTable />} />
+            <Route path="/traineeExamTable" element={<TraineeExamTable />} />
           </Route>
 
           <Route element={<RequireAuth> <TraineeLayout /> </RequireAuth>}>
@@ -52,7 +52,7 @@ function App() {
             <Route path="/trainee" element={<>This is trainee dashboard</>} />
             <Route path="/trainee/profile" element={<Users />} />
             <Route path="/trainee/exams" element={<TraineeExamDetails />} />
-            <Route path="/trainee/assignments" element={<AssignmentStatus />} />
+            <Route path="/trainee/assignment" element={<AssignmentStatus />} />
 
             <Route path="/logout" element={<Logout />} />
           </Route>
