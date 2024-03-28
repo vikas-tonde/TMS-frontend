@@ -29,8 +29,6 @@ const Form = () => {
                 "\n Location :" + values.location
             );
             
-            toast.success('Form submitted successfully!');
-
             values.firstName= '';
             values.lastName = '';
             values.email = '';
@@ -49,13 +47,15 @@ const Form = () => {
               role:values.role,
               location:values.location
             });
-            console.log("Response:", response.data);
+            console.log(response.data);
+            toast.success('User added...!');
             actions.setSubmitting(false);
 
         } catch (error) {
-            console.error("Error:", error);
-            actions.setSubmitting(false);
+          toast.error('Something went wrong while adding User please check all fields carefully...!');
+          console.log(error.response);
         }
+        actions.resetForm();
       };
     
       const { handleChange, handleBlur, values, handleSubmit, errors, touched } = useFormik({

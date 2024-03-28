@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
+import { useLoaderData } from "react-router";
+import api from "../authService/api";
 
 const Table = () => {
+
+  const batches = useLoaderData();
 
   const columnHelper = createColumnHelper();
 
@@ -20,33 +24,27 @@ const Table = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Current Training",
     }),
-    columnHelper.accessor("trainees", {
-      cell: (info) => <span>{info.getValue()}</span>,
-      header: "Trainees",
-    }),
-    columnHelper.accessor("assessments", {
-      cell: (info) => <span>{info.getValue()}</span>,
-      header: "Assessments",
-    }),
+    // columnHelper.accessor("trainees", {
+    //   cell: (info) => <span>{info.getValue()}</span>,
+    //   header: "Trainees",
+    // }),
+    // columnHelper.accessor("assessments", {
+    //   cell: (info) => <span>{info.getValue()}</span>,
+    //   header: "Assessments",
+    // }),
     columnHelper.accessor("", {
       id: "edit",
       cell: (info) => {
-        const batchName = info.row.original.batchName;
-        const slug = batchName.replace(/ /g, "-"); // Generating slug from batchName
+        console.log(info);
+        const slug = info.row.original.srno;
+        //const slug = batchName.replace(/ /g, "-"); // Generating slug from batchName
         return <Link to={`/batch/${slug}`}>Edit</Link>;
       },
       header: "",
     }),
   ];
 
-  const [data] = useState([
-    { srno: 1, batchName: "Fresher's Batch 1", currentTraining: "AWC", trainees: 27, assessments: 12 },
-    { srno: 2, batchName: "Fresher's Batch 2", currentTraining: "Teamcenter", trainees: 10, assessments: 11 },
-    { srno: 3, batchName: "Fresher's Batch 3", currentTraining: "ITK", trainees: 10, assessments: 11 },
-    { srno: 5, batchName: "Referral's Batch 1", currentTraining: "BMIDE", trainees: 12, assessments: 10 },
-    { srno: 6, batchName: "Referral's Batch 2", currentTraining: "ITK", trainees: 12, assessments: 10 },
-    { srno: 7, batchName: "Referral's Batch 3", currentTraining: "ITK", trainees: 12, assessments: 10 },
-  ]);
+  const [data] = useState(batches);
 
   const [globalFilter] = useState("");
   const [search, setSearch] = useState("");
@@ -105,13 +103,18 @@ const Table = () => {
                   ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-neutral-200 
                   `}
                 >
-                  {Object.entries(row).map(([key, value]) => (
-                    <td key={key} className="px-4 py-2 ">
-                      {value}
+                  
+                    <td className="px-4 py-2 ">
+                      {row._id}
                     </td>
-                  ))}
+                    <td className="px-4 py-2 ">
+                      {row.batchName}
+                    </td>
+                    <td className="px-4 py-2 ">
+                      {row.currentTraining}
+                    </td>
                   <td key="edit" className="px-4 py-2">
-                    <Link to={`/batch/${row.batchName.replace(/ /g, "-")}`}>
+                    <Link to={`/batch/${row._id}`}>
                       <button className="bg-blue text-white font-bold py-2 px-4 rounded" >
                         Edit
                       </button>
@@ -132,3 +135,13 @@ const Table = () => {
 };
 
 export default Table;
+
+export const getBatches = async () => {
+  try {
+      console.log("Calling Batch api");
+      let response = await api.get("/api/admin/batches");
+      return response.data.data;
+  } catch (error) {
+      return [];
+  }
+}

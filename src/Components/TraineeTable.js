@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
+import { useLoaderData } from "react-router";
 
 const Table = () => {
 
   const columnHelper = createColumnHelper();
 
   const columns = [
-    
+
     columnHelper.accessor("", {
       id: "srno",
       cell: (info) => <span>{info.row.index + 1}</span>,
@@ -26,11 +27,11 @@ const Table = () => {
     }),
   ];
   const [data] = useState([
-    {  empId: 'T50477', name: "Rishi", avgMarks: 12 },
-    {  empId: 'T50477', name: "Rishi", avgMarks: 12 },
+    { empId: 'T50477', name: "Rishi", avgMarks: 12 },
+    { empId: 'T50477', name: "Rishi", avgMarks: 12 },
     { empId: 'T50498', name: "Vikas", avgMarks: 11 },
-    {  empId: 'T50481', name: "Rutika", avgMarks: 10 },
-    {  empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
+    { empId: 'T50481', name: "Rutika", avgMarks: 10 },
+    { empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
     { empId: 'T50494', name: "Trupti", avgMarks: 25 },
   ]);
   const [globalFilter] = useState("");
@@ -50,10 +51,10 @@ const Table = () => {
 
   const data2 = [
     { empId: 'T50477', name: "Rishi", avgMarks: 12 },
-    {  empId: 'T50498', name: "Vikas", avgMarks: 11 },
-    {  empId: 'T50481', name: "Rutika", avgMarks: 10 },
+    { empId: 'T50498', name: "Vikas", avgMarks: 11 },
+    { empId: 'T50481', name: "Rutika", avgMarks: 10 },
     { empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
-    {  empId: 'T50494', name: "Trupti", avgMarks: 25 },
+    { empId: 'T50494', name: "Trupti", avgMarks: 25 },
   ];
 
   return (
@@ -74,12 +75,31 @@ const Table = () => {
               x-model="search" />
           </div>
         </div>
-        <div className="flex justify-end mr-6 mb-6">
-        <button type="button" className="inline-flex justify-center items-center px-4 py-2 border border-blue-600 shadow-sm text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-  De Activate
-</button>
+
+        <div className="m-5 flex justify-end">
+          <div className="flex-1 pr-1">
+            <select className="shadow appearance-none block bg-white rounded-md w-full h-9 py-2 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+              id="batch"
+              name="batch"
+            >
+              <option value="" disabled selected>Select Batch</option>
+              <option value="batch1">Pune Freshers Batch 1</option>
+              <option value="batch2">Pune Freshers Batch 2</option>
+              <option value="batch3">Pune Freshers Batch 3</option>
+            </select>
+          </div>
+        </div>
+        <div className="flex justify-end">
+
+          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Deactivate</button>
+
+          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Activate</button>
+
+          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Check</button>
 
         </div>
+
+
         <table className="shadow-sm p-6 h-max w-full text-left mb-5 border-spacing-0" id="table-to-xls">
           <thead className="bg-[#0A1C3E] text-white p-3 h-16 ">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -111,7 +131,7 @@ const Table = () => {
                       type="checkbox"
                       // Assuming row.srno is unique
                       value={row.srno}
-                      // Add your checkbox handler function here
+                    // Add your checkbox handler function here
                     />
                   </td>
                   {Object.entries(row).map(([key, value]) => (
@@ -128,6 +148,7 @@ const Table = () => {
             )}
           </tbody>
         </table>
+
       </div>
     </>
   );

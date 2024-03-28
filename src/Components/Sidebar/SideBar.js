@@ -32,7 +32,7 @@ const routes = [
         icon: <FaUser />,
       },
       {
-        path: "/exams/bulk",
+        path: "/exams/addbulk",
         name: "Bulk Entry",
         icon: <FaUser />,
       },
@@ -49,7 +49,7 @@ const routes = [
         icon: <FaUser />,
       },
       {
-        path: "/trainees/bulkentry",
+        path: "/trainees/addbulk",
         name: "Bulk Entry",
         icon: <FaUser />,
       },
