@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import App from './App';
-import BatchTable from "./Components/BatchTable";
+import BatchTable, { getBatches } from "./Components/BatchTable";
 import AdminLayout from './Components/Layouts/AdminLayout';
 import MasterLayout from './Components/Layouts/MasterLayout';
 import TraineeLayout from './Components/Layouts/TraineeLayout';
@@ -18,6 +18,7 @@ import Login from './Pages/LoginPage';
 import Logout from './Pages/Logout';
 import Messages from './Pages/Messages';
 import SingleEntryUser from './Pages/SingleEntryUser';
+import BulkEntryXlsx from './Pages/BulkEntryXlsx';
 import TraineeInfo from './Pages/TraineeInfo';
 import Users from './Pages/Users';
 import { AuthProvider, RequireAuth } from './authService/auth';
@@ -43,11 +44,12 @@ const router = createBrowserRouter(
           <Route path="/exams/single" element={<TraineeExamData />} />
 
           <Route path="/trainees/singleentry" element={<SingleEntryUser />} />
+          <Route path="/trainees/addbulk" element={<BulkEntryXlsx />} />
           <Route path="/exams/addbulk" element={<BulkEntryModuleForm />} loader={getModules} />
           <Route path="/trainees/alltrainees" element={<TraineeTable />} />
 
 
-          <Route path="/batch" element={<BatchTable />} />
+          <Route path="/batch" element={<BatchTable />} loader = {getBatches} />
           <Route path="/batch/:batchName" element={<Batch />} />
           <Route path="/graph" element={<Analytics />} />
           <Route path="/logout" element={<Logout />} />

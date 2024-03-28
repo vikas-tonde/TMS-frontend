@@ -49,7 +49,7 @@ const routes = [
         icon: <FaUser />,
       },
       {
-        path: "/trainees/bulkentry",
+        path: "/trainees/addbulk",
         name: "Bulk Entry",
         icon: <FaUser />,
       },
