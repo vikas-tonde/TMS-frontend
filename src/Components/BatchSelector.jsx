@@ -2,21 +2,23 @@ import React, { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const Selector = () => {
-  const [countries, setyear] = useState(null);
+const Selector = ({ loader }) => {
+  const [batches, setBatches] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [selected, setSelected] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v2/all?fields=name")
-      .then((res) => res.json())
-      .then((data) => {
-        setyear(data);
-      });
-  }, []);
+    const fetchData = async () => {
+      const batchesData = await loader();
+      setBatches(batchesData);
+    };
+
+    fetchData();
+  }, [loader]);
+
   return (
-    <div className="w-72 m-5 font-medium outline outline-2 outline-offset-2 rounded-lg" >
+    <div className="w-72 m-5 font-medium outline outline-2 outline-offset-2 rounded-lg">
       <div
         onClick={() => setOpen(!open)}
         className={`bg-white w-full p-2 flex items-center justify-between rounded ${
@@ -27,13 +29,13 @@ const Selector = () => {
           ? selected?.length > 25
             ? selected?.substring(0, 25) + "..."
             : selected
-          : "Select Year"}
+          : "Select Batch"}
         <BiChevronDown size={20} className={`${open && "rotate-180"}`} />
       </div>
       <ul
         className={`bg-white mt-2 overflow-y-auto ${
           open ? "max-h-60" : "max-h-0"
-        } `}
+        }`}
       >
         <div className="flex items-center px-2 sticky top-0 bg-white">
           <AiOutlineSearch size={18} className="text-gray-700" />
@@ -41,32 +43,32 @@ const Selector = () => {
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value.toLowerCase())}
-            placeholder="Enter Year "
+            placeholder="Enter Batch Name"
             className="placeholder:text-gray-700 p-2 outline-none"
           />
         </div>
-        {countries?.map((Year) => (
+        {batches?.map((batch) => (
           <li
-            key={Year?.name}
+            key={batch._id}
             className={`p-2 text-sm hover:bg-sky-600 hover:text-sky
             ${
-                Year?.name?.toLowerCase() === selected?.toLowerCase() &&
+              batch._id === selected &&
               "bg-sky-600 text-sky"
             }
             ${
-                Year?.name?.toLowerCase().startsWith(inputValue)
+              batch.batchName.toLowerCase().startsWith(inputValue)
                 ? "block"
                 : "hidden"
             }`}
             onClick={() => {
-              if (Year?.name?.toLowerCase() !== selected.toLowerCase()) {
-                setSelected(Year?.name);
+              if (batch._id !== selected) {
+                setSelected(batch.batchName);
                 setOpen(false);
                 setInputValue("");
               }
             }}
           >
-            {Year?.name}
+            {batch.batchName}
           </li>
         ))}
       </ul>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
-import { useLoaderData } from "react-router";
+import { getBatches } from "./../services/loaderFunctions";
+import BatchSelector from "./../Components/BatchSelector";
 
 const Table = () => {
 
@@ -76,19 +77,8 @@ const Table = () => {
           </div>
         </div>
 
-        <div className="m-5 flex justify-end">
-          <div className="flex-1 pr-1">
-            <select className="shadow appearance-none block bg-white rounded-md w-full h-9 py-2 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
-              id="batch"
-              name="batch"
-            >
-              <option value="" disabled selected>Select Batch</option>
-              <option value="batch1">Pune Freshers Batch 1</option>
-              <option value="batch2">Pune Freshers Batch 2</option>
-              <option value="batch3">Pune Freshers Batch 3</option>
-            </select>
-          </div>
-        </div>
+        < BatchSelector loader={getBatches} />
+
         <div className="flex justify-end">
 
           <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Deactivate</button>
