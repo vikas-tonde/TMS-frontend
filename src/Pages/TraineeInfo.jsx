@@ -1,7 +1,7 @@
 import { createColumnHelper, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import api from "../authService/api";
-
+import ReactApexChart from "react-apexcharts";
 
 const TraineeInfo = () => {
     // useEffect(() => {
