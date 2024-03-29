@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
     let signin = async (values, actions) => {
         let response = await api.post(`/api/users/login`, values);
         let { data } = response.data;
-        console.log("Data:",data.user);
+        console.log("Data:", data.user);
         actions.resetForm();
         if (data?.user === null || data?.user === undefined) {
             setUser(null);
@@ -18,12 +18,12 @@ export function AuthProvider({ children }) {
         }
         else {
             setUser(data.user);
-            console.log("user:",user);
-            if(data?.user?.role==="Admin"){
+            console.log("user:", user);
+            if (data?.user?.role === "Admin") {
                 let to = location.state?.from?.pathname || "/dashboard";
                 navigate(to, { replace: true, state: "Login success" });
             }
-            if(data?.user?.role==="Trainee"){
+            if (data?.user?.role === "Trainee") {
                 let to = location.state?.from?.pathname || "/trainee";
                 navigate(to, { replace: true, state: "Login success" });
             }
@@ -44,22 +44,21 @@ export function useAuth() {
 
 export function RequireAuth({ children }) {
     let auth = useAuth();
-    let handleRefresh = async () => {
-        let response = await api.get("/api/users/");
-        let { data } = response.data;
-        console.log("Logged in after refresh.");
-        auth.setUser(data.user);
-    }
     if (!auth?.user) {
         // Redirect them to the /login page, but save the current location they were
         // trying to go to when they were redirected. This allows us to send them
         // along to that page after they login, which is a nicer user experience
         // than dropping them off on the home page.
-        try {
-            handleRefresh();
-        } catch (error) {
-            return <Navigate to="/login" state="Please login again.." replace />;
-        }
+
+        api.get("/api/users/")
+            .then(response => {
+                let { data } = response.data;
+                console.log("Logged in after refresh.");
+                auth.setUser(data.user);
+            })
+            .catch(e => {
+                return <Navigate to="/login" state="Please login again.." replace />;
+            });
     }
     return children;
 }
