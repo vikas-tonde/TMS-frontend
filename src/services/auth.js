@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import api from "./api";
 let AuthContext = createContext();
 
@@ -44,22 +44,25 @@ export function useAuth() {
 
 export function RequireAuth({ children }) {
     let auth = useAuth();
+    let nevigate = useNavigate();
     if (!auth?.user) {
         // Redirect them to the /login page, but save the current location they were
         // trying to go to when they were redirected. This allows us to send them
         // along to that page after they login, which is a nicer user experience
         // than dropping them off on the home page.
-
-        api.get("/api/users/")
-            .then(response => {
+        (async () => {
+            try {
+                let response = await api.get("/api/users/");
                 let { data } = response.data;
                 console.log("Logged in after refresh.");
                 auth.setUser(data.user);
-            })
-            .catch(e => {
-                return <Navigate to="/login" state="Please login again.." replace />;
-            });
+            } catch (error) {
+                nevigate("/login",{state:"Please login again..", replace:true})
+            }
+        })();
     }
-    return children;
+    else{
+        return children;
+    }
 }
 

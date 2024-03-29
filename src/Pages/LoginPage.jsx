@@ -1,7 +1,7 @@
 import React from 'react'
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
-import { useAuth } from '../authService/auth.js';
+import { useAuth } from '../services/auth.js';
 import { useLocation } from 'react-router-dom';
 
 let loginSchema = object().shape({

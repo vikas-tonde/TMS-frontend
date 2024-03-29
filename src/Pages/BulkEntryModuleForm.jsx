@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router";
-import api from "../authService/api";
+import api from "../services/api";
 import SelectorForTestDetails from "./SelectorForTestDetails";
 import { useEffect, useState } from "react";
 import { object, string, number, mixed } from 'yup';
@@ -207,13 +207,3 @@ function BulkEntryModuleForm() {
 }
 
 export default BulkEntryModuleForm;
-
-export const getModules = async () => {
-    try {
-        console.log("Calling modules api");
-        let response = await api.get("/api/admin/modules");
-        return response.data.data;
-    } catch (error) {
-        return [];
-    }
-}

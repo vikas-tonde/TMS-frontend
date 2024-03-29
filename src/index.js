@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import App from './App';
-import BatchTable, { getBatches } from "./Components/BatchTable";
+import BatchTable from "./Components/BatchTable";
 import AdminLayout from './Components/Layouts/AdminLayout';
 import MasterLayout from './Components/Layouts/MasterLayout';
 import TraineeLayout from './Components/Layouts/TraineeLayout';
@@ -11,18 +11,19 @@ import TraineeTable from './Components/TraineeTable';
 import Analytics from './Pages/Analytics';
 import AssignmentStatus from './Pages/AssignmentStatus';
 import Batch from './Pages/Batch';
-import BulkEntryModuleForm, { getModules } from './Pages/BulkEntryModuleForm';
+import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
+import BulkEntryXlsx from './Pages/BulkEntryXlsx';
 import Dashboard from './Pages/Dashboard';
 import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
 import Logout from './Pages/Logout';
 import Messages from './Pages/Messages';
 import SingleEntryUser from './Pages/SingleEntryUser';
-import BulkEntryXlsx from './Pages/BulkEntryXlsx';
 import TraineeInfo from './Pages/TraineeInfo';
 import Users from './Pages/Users';
-import { AuthProvider, RequireAuth } from './authService/auth';
 import './index.css';
+import { AuthProvider, RequireAuth } from './services/auth';
+import { getBatches, getModules } from './services/loaderFunctions';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,7 +42,7 @@ const router = createBrowserRouter(
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Users />} />
           <Route path="/exams" element={<Messages />} />
-          <Route path="/exams/single" element={<TraineeExamData />} />
+          <Route path="/exams/single" element={<TraineeExamData />} loader={getBatches} />
 
           <Route path="/trainees/singleentry" element={<SingleEntryUser />} />
           <Route path="/trainees/addbulk" element={<BulkEntryXlsx />} />

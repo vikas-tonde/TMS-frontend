@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 import { useLoaderData } from "react-router";
-import api from "../authService/api";
+import api from "../services/api";
 
 const Table = () => {
 
@@ -135,13 +135,3 @@ const Table = () => {
 };
 
 export default Table;
-
-export const getBatches = async () => {
-  try {
-      console.log("Calling Batch api");
-      let response = await api.get("/api/admin/batches");
-      return response.data.data;
-  } catch (error) {
-      return [];
-  }
-}

@@ -1,4 +1,4 @@
-import api from "../authService/api";
+import api from "../services/api";
 import { object, string, mixed } from 'yup';
 import { useFormik } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
