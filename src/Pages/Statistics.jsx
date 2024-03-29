@@ -67,7 +67,7 @@ const Statistics = ({ location }) => {
                   <span className="text-sm">Number of exams conducted during the training program.</span>
                 </div>
                 <div className="inline-flex items-center">
-                  <div className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
+                  <div className="w-6 h-6 p-5 text-white flex items-center justify-center rounded-full text-md font-semibold">
                     <p className="text-3xl font-bold mt-2">18</p>
                   </div>
                 </div>
@@ -78,7 +78,7 @@ const Statistics = ({ location }) => {
                   <span className="text-sm">Number of trainees currently enrolled in the training program.</span>
                 </div>
                 <div className="inline-flex items-center">
-                  <div className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
+                  <div className="w-6 h-6 p-5 text-white flex items-center justify-center rounded-full text-md font-semibold">
                     <p className="text-3xl font-bold mt-2">27</p>
                   </div>
                 </div>
@@ -89,7 +89,7 @@ const Statistics = ({ location }) => {
                   <span className="text-sm">Number of trainees currently undergoing training.</span>
                 </div>
                 <div className="inline-flex items-center">
-                  <div className="w-6 h-6 p-5 bg-gray-500 text-white flex items-center justify-center rounded-full text-md font-semibold">
+                  <div className="w-6 h-6 p-5 text-white flex items-center justify-center rounded-full text-md font-semibold">
                     <p className="text-3xl font-bold mt-2">03</p>
                   </div>
                 </div>

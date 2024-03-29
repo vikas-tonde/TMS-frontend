@@ -91,7 +91,7 @@ const Table = () => {
 
 
         <table className="shadow-sm p-6 h-max w-full text-left mb-5 border-spacing-0" id="table-to-xls">
-          <thead className="bg-[#0A1C3E] text-white p-3 h-16 ">
+          <thead className="bg-blue text-white p-3 h-16 ">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
