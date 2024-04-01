@@ -7,6 +7,7 @@ import AdminLayout from './Components/Layouts/AdminLayout';
 import MasterLayout from './Components/Layouts/MasterLayout';
 import TraineeLayout from './Components/Layouts/TraineeLayout';
 import TraineeExamData from './Components/TraineeExamData';
+import TraineeExamTable from './Components/TraineeExamTable';
 import TraineeTable from './Components/TraineeTable';
 import Analytics from './Pages/Analytics';
 import AssignmentStatus from './Pages/AssignmentStatus';
@@ -48,7 +49,7 @@ const router = createBrowserRouter(
           <Route path="/trainees/singleentry" element={<SingleEntryUser />} />
           <Route path="/trainees/addbulk" element={<BulkEntryXlsx />} />
           <Route path="/exams/addbulk" element={<BulkEntryModuleForm />} loader={getModules} />
-          <Route path="/trainees/alltrainees" element={<TraineeTable />} />
+          <Route path="/trainees/alltrainees" element={<TraineeTable />} loader={getBatches} />
 
 
           <Route path="/batch" element={<BatchTable />} loader = {getBatches} />
@@ -66,7 +67,7 @@ const router = createBrowserRouter(
 
           <Route path="/trainee" element={<>This is trainee dashboard</>} />
           <Route path="/trainee/profile" element={<Users />} />
-          <Route path="/trainee/exams" element={<TraineeTable />} />
+          <Route path="/trainee/exams" element={<TraineeExamTable />} />
           <Route path="/trainee/assignments" element={<AssignmentStatus />} />
 
           <Route path="/logout" element={<Logout />} />
