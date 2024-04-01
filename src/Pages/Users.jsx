@@ -1,6 +1,7 @@
 // import { Space} from "antd";
 import {useState } from "react";
 import { useAuth } from '../services/auth'
+import validator from 'validator'
 
 const Users = () => {
 
@@ -23,6 +24,15 @@ const Users = () => {
 
     setEditMode(true);
   } 
+
+  const validate = value => {
+    if (validator.isStrongPassword(value, { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 
+    })) { 
+      setPasswordError('')
+    } else { 
+      setPasswordError('Password must contain at least 8 characters, including uppercase, lowercase, and digits') 
+    } 
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -155,7 +165,7 @@ const Users = () => {
                   // id="inline-password" 
                   type="password" 
                   placeholder="Enter New Password" 
-                  value={password} onChange={(e) => setPassword(e.target.value)} disabled={!editMode} 
+                  value={password} onChange={(e) => {setPassword(e.target.value); validate(e.target.value)}} disabled={!editMode} 
                   />
                   <span className="hover:bg-[#000]"><i class="fas fa-eye"></i></span>
                   {passwordError && <p className="text-red-500 text-xs italic">{passwordError}</p>}

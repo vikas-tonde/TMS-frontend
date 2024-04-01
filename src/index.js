@@ -43,6 +43,7 @@ const router = createBrowserRouter(
           <Route path="/profile" element={<Users />} />
           <Route path="/exams" element={<Messages />} />
           <Route path="/exams/single" element={<TraineeExamData />} loader={getBatches} />
+          <Route path="/dashboard/:empId" element={<TraineeInfo />} />
 
           <Route path="/trainees/singleentry" element={<SingleEntryUser />} />
           <Route path="/trainees/addbulk" element={<BulkEntryXlsx />} />

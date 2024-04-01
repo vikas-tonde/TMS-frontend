@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Table = () => {
 
   const columnHelper = createColumnHelper();
-
+  
   const columns = [
     columnHelper.accessor("", {
       id: "srno",
@@ -123,40 +123,7 @@ const Table = () => {
             )}
           </tbody>
         </table>
-        {/* Pagination */}
-        <div className="flex items-center justify-end mt-2 gap-2">
-          <button
-            onClick={() => { table.previousPage() }}
-            disabled={!table.getCanPreviousPage()}
-            className="p-1 border-2 border-black disabled:opacity-30 px-2">{"<"}
-          </button>
-          <button
-            onClick={() => { table.nextPage() }}
-            disabled={!table.getCanNextPage()}
-            className="p-1 border-2 border-black disabled:opacity-30 px-2">{">"}
-          </button>
-          <span className="flex items-center gap-1">
-            <div>Page </div>
-            <strong>
-              {table.getState().pagination.pageIndex + 1} of{" "} {table.getPageCount() + 1}
-            </strong>
-          </span>
-          <span className="flex items-center gap-1">
-            | Go to Page :
-            <input
-              type="number"
-              className=" pl-2 w-10"
-              defaultValue={table.getState().pagination.pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                table.setPageIndex(page);
-              }}
-            ></input>
-          </span>
-
-        </div>
       </div>
-
     </>
   );
 };
