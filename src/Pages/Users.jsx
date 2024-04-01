@@ -1,7 +1,19 @@
 // import { Space} from "antd";
 import {useState } from "react";
+import { useAuth } from '../services/auth'
+import validator from 'validator'
 
 const Users = () => {
+
+  const {user } = useAuth()
+
+  const userInfo = {
+    username : user.firstName + " "+ user.lastName,
+    email : user.email,
+    empId : user.employeeId,
+    loc : user.location
+  }
+
   const [password, setPassword] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -13,12 +25,19 @@ const Users = () => {
     setEditMode(true);
   } 
 
+  const validate = value => {
+    if (validator.isStrongPassword(value, { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 
+    })) { 
+      setPasswordError('')
+    } else { 
+      setPasswordError('Password must contain at least 8 characters, including uppercase, lowercase, and digits') 
+    } 
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setPasswordError('');
     setConfirmPasswordError('');
-
     if (!password) {
       setPasswordError('Please enter a password');
       return;
@@ -33,19 +52,18 @@ const Users = () => {
       return;
     }
 
-    console.log('Password submitted:', password);
+    // console.log('Password submitted:', password);
     // Reset password and disable edit mode after submission
     setPassword('');
     setConfirmPassword('');
     setEditMode(false);
   };
 
-  const user = {
+  const user1 = {
     avatar: 'https://cdn.hero.page/pfp/b0b19559-3cbb-4781-8267-814aa9e0f12b-modern-anime-guy-anime-guys-pfp-unique-1.png',
-    city: 'Pune',
+    city: userInfo.loc,
     country: 'India',
-    jobTitle: 'Teamcenter Developer',
-    name: 'Rishi Rathod',
+    name: userInfo.username,
     timezone: 'GTM-7'
   };
 
@@ -59,13 +77,13 @@ const Users = () => {
           <div className="bg-white border rounded-md shadow-md p-4 mb-12">
             <div className="flex flex-col items-center">
               <img
-                src={user.avatar}
+                src={user1.avatar}
                 alt="User Avatar"
                 className="h-32 w-32 rounded-full mb-2"
               />
-              <h5 className="text-lg font-semibold mb-1">{user.name}</h5>
-              <p className="text-sm text-gray-500 mb-1">{user.city} {user.country}</p>
-              <p className="text-sm text-gray-500">{user.timezone}</p>
+              <h5 className="text-lg font-semibold mb-1">{userInfo.username}</h5>
+              <p className="text-sm text-gray-500 mb-1">{user1.city} {user1.country}</p>
+              <p className="text-sm text-gray-500">{user1.timezone}</p>
             </div>
             <hr className="my-4 border-gray-200" />
             <div className="flex justify-center">
@@ -91,10 +109,11 @@ const Users = () => {
               </div>
               <div class="md:w-2/3">
                 <input 
-                  class="bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
+                  class="bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-80 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
                   type="name" 
                   placeholder="Name of Trainee" 
                   aria-label="Disabled input example" 
+                  defaultValue={userInfo.username}
                   disabled readOnly 
                   />
               </div>
@@ -107,10 +126,11 @@ const Users = () => {
               </div>
               <div class="md:w-2/3">
                 <input 
-                  class="bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
+                  class="bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-80 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
                   type="email" 
                   placeholder="Email Address" 
                   aria-label="Disabled input example" 
+                  defaultValue={userInfo.email}
                   disabled readOnly 
                   />
               </div>
@@ -123,10 +143,11 @@ const Users = () => {
               </div>
               <div class="md:w-2/3">
                 <input 
-                  class="bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
+                  class="bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-80 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
                   type="name" 
                   placeholder="Employee ID" 
                   aria-label="Disabled input example" 
+                  defaultValue={userInfo.empId}
                   disabled readOnly 
                   />
               </div>
@@ -134,17 +155,17 @@ const Users = () => {
                       
             <div className="md:flex md:items-center mb-6">
               <div class="md:w-3/5">
-                <label class="block text-gray-700 font-bold md: mb-1 md:mb-0 pr-4 items-start" for="inline-password">
+                <label class="block text-gray-700 font-bold md: mb-1 md:mb-0 pr-4 items-start" >
                   Change Password
                 </label>
               </div>
               <div class="md:w-2/3">
                 <input 
-                  class="bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-full py-2 px-4  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
-                  id="inline-password" 
+                  className = {`bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-80 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 ${editMode ? 'bg-white' : ''}`}
+                  // id="inline-password" 
                   type="password" 
                   placeholder="Enter New Password" 
-                  value={password} onChange={(e) => setPassword(e.target.value)} disabled={!editMode} 
+                  value={password} onChange={(e) => {setPassword(e.target.value); validate(e.target.value)}} disabled={!editMode} 
                   />
                   <span className="hover:bg-[#000]"><i class="fas fa-eye"></i></span>
                   {passwordError && <p className="text-red-500 text-xs italic">{passwordError}</p>}
@@ -153,14 +174,15 @@ const Users = () => {
 
             <div className="md:flex md:items-center mb-6">
               <div class="md:w-3/5">
-                <label class="block text-gray-700 font-bold md: mb-1 md:mb-0 pr-4 items-start" for="inline-password">
+                <label class="block text-gray-700 font-bold md: mb-1 md:mb-0 pr-4 items-start">
+                {/* <label class="block text-gray-700 font-bold md: mb-1 md:mb-0 pr-4 items-start" for="inline-password"> */}
                   Confirm Passoword
                 </label>
               </div>
               <div class="md:w-2/3">
                 <input 
-                  class="bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
-                  id="inline-password" 
+                  className = {`bg-gray-200 shadow appearance-none border-2 border-gray-200 rounded w-80 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 ${editMode ? 'bg-white' : ''}`}
+                  // id="inline-password" 
                   type="password" 
                   placeholder="Re-Enter Password" 
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -171,8 +193,8 @@ const Users = () => {
             </div>
     
             <div className="grid justify-center items-center gap-2 md:flex md:flex-row">
-              <button className="text-[#0A1C3E] bg-white hover:text-white border border-[#0A1C3E] hover:bg-[#0A1C3E] hover:border-white focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-white dark:text-white dark:hover:text-[#0A1C3E]  dark:focus:ring-white]" variant="primary" onClick={handleEditClick} disabled={editMode}>Edit</button>
-              <button className="text-[#0A1C3E] bg-white hover:text-white border border-[#0A1C3E] hover:bg-[#0A1C3E] hover:border-white focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-white dark:text-white dark:hover:text-[#0A1C3E]  dark:focus:ring-white]" variant="primary" onClick={handleSubmit} type="submit" disabled={!editMode} >Submit</button>
+            <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]" variant="primary" onClick={handleEditClick} disabled={editMode}>Edit</button>
+              <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]" variant="primary" onClick={handleSubmit} type="submit" disabled={!editMode} >Submit</button>
             </div>
           </form>
         </div>

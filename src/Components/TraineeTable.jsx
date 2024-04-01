@@ -1,18 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
-import { getBatches } from "../services/loaderFunctions";
-import BatchSelector from "./BatchSelector";
-
-const Table = () => {
+import { Link } from "react-router-dom";
+import { useLoaderData } from "react-router";
+import api from "../services/api";
+const TraineeTable = () => {
+  const batches = useLoaderData();
+  const [trainees, setTrainees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedBatch, setSelectedBatch] = useState("");
+  useEffect(() => {
+    const fetchTrainees = async () => {
+      try {
+        console.log(selectedBatch);
+        const response = await api.get(`/api/admin/trainees/info/${selectedBatch}`);
+        console.log(response.data.data);
+        setTrainees(response.data.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching trainees:", error);
+        setLoading(false);
+      }
+    };
+    fetchTrainees();
+  }, [selectedBatch]);
 
   const columnHelper = createColumnHelper();
-
+ 
   const columns = [
-
     columnHelper.accessor("", {
       id: "srno",
       cell: (info) => <span>{info.row.index + 1}</span>,
-      header: "Sr.No.",
+      header: "",
     }),
     columnHelper.accessor("empId", {
       cell: (info) => <span>{info.getValue()}</span>,
@@ -20,49 +39,39 @@ const Table = () => {
     }),
     columnHelper.accessor("name", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: " Name",
+      header: "Name",
     }),
-    columnHelper.accessor("avgMarks", {
+    columnHelper.accessor("email", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: "Average Marks",
+      header: "Email",
+    }),
+    columnHelper.accessor("", {
+      id: "edit",
+      cell: (info) => {
+        const slug = info.row.original.employeeId;
+        return <Link to={`/table/${slug}`}>Edit</Link>;
+      },
+      header: "",
     }),
   ];
-  const [data] = useState([
-    { empId: 'T50477', name: "Rishi", avgMarks: 12 },
-    { empId: 'T50477', name: "Rishi", avgMarks: 12 },
-    { empId: 'T50498', name: "Vikas", avgMarks: 11 },
-    { empId: 'T50481', name: "Rutika", avgMarks: 10 },
-    { empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
-    { empId: 'T50494', name: "Trupti", avgMarks: 25 },
-  ]);
   const [globalFilter] = useState("");
-
+ 
   const [search, setSearch] = useState("");
 
   const table = useReactTable({
-    data,
+    data: trainees,
     columns,
-    state: {
-      globalFilter,
-    },
+    state: {},
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  const data2 = [
-    { empId: 'T50477', name: "Rishi", avgMarks: 12 },
-    { empId: 'T50498', name: "Vikas", avgMarks: 11 },
-    { empId: 'T50481', name: "Rutika", avgMarks: 10 },
-    { empId: 'T50482', name: "Shivkanya", avgMarks: 19 },
-    { empId: 'T50494', name: "Trupti", avgMarks: 25 },
-  ];
-
   return (
     <>
       <div className=" mx-auto max-w-full md:p-3 2xl:p-6">
         <h1 className="text-2xl font-semibold text-center py-2 text-[#0A1C3E] dark:text-white border-b border-gray-200 dark:border-gray-700">Table of Trainee</h1>
-
+ 
         <div className="" x-data="{ search: '' }">
           <div className=" mb-2 w-50 flex rounded-md">
             <svg className="w-5 h-8 pl-1 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -76,19 +85,42 @@ const Table = () => {
               x-model="search" />
           </div>
         </div>
-
-        < BatchSelector loader={getBatches} />
-
-        <div className="flex justify-end">
-
-          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Deactivate</button>
-
-          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Activate</button>
-
-          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Check</button>
-
+ 
+        <div className="m-10 col-span-full flex w items-center ">
+          <label
+            htmlFor="batch"
+            className="block text-xl font-medium  text-gray-900 mr-2"
+          >
+            Select batch
+          </label>
+          <div className="mt-4 pl-10">
+            <select
+              id="batch"
+              name="batch"
+              autoComplete="off"
+              value={selectedBatch}
+              onChange={(e)=>setSelectedBatch(e.target.value)}
+              className="block w-96 h-9 rounded-md border-0 py-1.5 text-gray-800 shadow-xl ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset  focus:text-gray-800 mr-2 sm:max-w-xs sm:text-sm sm:leading-6"
+            >
+              <option value="" selected disabled>Select the batch</option>
+              {batches.map(batch => (
+                <option key={batch._id} value={batch._id}>{batch.batchName}</option>
+              ))}
+            </select>
+          </div>
         </div>
-
+        
+        
+ 
+        <div className="flex justify-end">
+ 
+          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Deactivate</button>
+ 
+          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Activate</button>
+ 
+          <button className="text-white bg-[#0A1C3E] hover:text-[#0A1C3E] border border-white hover:bg-white hover:border-[#0A1C3E] focus:ring-4 focus:outline-none focus:ring-[#0A1C3E]-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-4 me-2 mb-10 dark:border-[#0A1C3E] dark:text-[#0A1C3E] dark:hover:text-white  dark:focus:ring-[#0A1C3E]">Check</button>
+ 
+        </div>
 
         <table className="shadow-sm p-6 h-max w-full text-left mb-5 border-spacing-0" id="table-to-xls">
           <thead className="bg-blue text-white p-3 h-16 ">
@@ -106,29 +138,41 @@ const Table = () => {
             ))}
           </thead>
           <tbody>
-            {data2.length ? (
-              data2.filter((item) => {
-                return search.toLowerCase() === '' ? item : item.empId.toLowerCase().includes(search) || item.name.toLowerCase().includes(search)
-              }).map((row, i) => (
+            {trainees?.length ? (
+              trainees.map((row, i) => (
                 <tr
-                  key={row.srno}
+                  key={row.i}
                   className={`
                   ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-neutral-200 
                   `}
                 >
-                  <td className="px-4 py-2">
-                    <input
+                   <td className="px-4 py-2 ">
+                   <input
                       type="checkbox"
                       // Assuming row.srno is unique
                       value={row.srno}
                     // Add your checkbox handler function here
                     />
-                  </td>
-                  {Object.entries(row).map(([key, value]) => (
-                    <td key={key} className="px-4 py-2 ">
-                      {value}
+                      {row.srno}
+                      
                     </td>
-                  ))}
+                  <td className="px-4 py-2 ">
+                      {row.employeeId}
+                    </td>
+                    <td className="px-4 py-2 ">
+                      {row.firstName} {row.lastName} 
+                    </td>
+                    <td className="px-4 py-2 ">
+                      {row.email}
+                    </td>
+                    <td key="edit" className="px-4 py-2">
+                    <Link to={`/table/${row.employeeId}`}>
+                      <button className="bg-blue text-white font-bold py-2 px-4 rounded" >
+                        Edit
+                      </button>
+                    </Link>
+                  </td>
+                    
                 </tr>
               ))
             ) : (
@@ -144,4 +188,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default TraineeTable;
