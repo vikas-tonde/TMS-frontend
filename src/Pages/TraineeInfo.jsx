@@ -9,14 +9,14 @@ const TraineeInfo = () => {
     //     .then(res=>console.log(res))
     //     .catch(res=>console.log("Error Occuered during fetching"));
     // },[])
-    useEffect(async() => {
-        try {
-            let response = await api.get('api/admin/batches')
-            console.log(response.data.data[0].trainees);
-        } catch (error) {
-            console.log("Error Occuered during fetching")
-        }
-    },[])
+    // useEffect(async() => {
+    //     try {
+    //         let response = await api.get('api/admin/batches')
+    //         console.log(response.data.data[0].trainees);
+    //     } catch (error) {
+    //         console.log("Error Occuered during fetching")
+    //     }
+    // },[])
 
     
     const module = ['Teamcenter', 'Teamcenter Function', 'BMIDE', 'ITK', 'ITK Function', 'RAC', 'AWC', 'AWC Functional'];
