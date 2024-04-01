@@ -77,7 +77,7 @@ const Table = () => {
         </div>
 
         <table className="shadow-sm p-6 h-max w-full text-left mb-5 border-spacing-0" id="table-to-xls">
-          <thead className="bg-gray-300 p-3 h-16 ">
+          <thead className="bg-[#0A1C3E] text-white p-3 h-16 ">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -99,15 +99,7 @@ const Table = () => {
                 <tr
                   key={row.srno}
                   className={`
-<<<<<<< HEAD
                   ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-gray-200 
-=======
-<<<<<<< HEAD
-                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16
-=======
-                  ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-gray-300 
->>>>>>> 22382742d5c8af1b37ab71d2eccfd3d362907e38
->>>>>>> e4b24a42c6825a61e720ecc6e9dbc5c2ac8c5eb4
                   `}
                 >
                   {Object.entries(row).map(([key, value]) => (
