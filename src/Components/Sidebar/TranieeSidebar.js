@@ -2,14 +2,19 @@ import { BiAnalyse } from "react-icons/bi";
 import { FaBars, FaUser } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-
+import {  FaHome} from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaSignOutAlt } from "react-icons/fa";
 import SidebarMenu from "./SidebarMenu";
 const routes = [
-  
+  {
+    path: "/trainee/dashboard",
+    name: "DashBoard",
+    icon: <FaHome />,
+    
+  },
   {
     path: "/trainee/profile",
     name: "Personal Information",
@@ -21,18 +26,7 @@ const routes = [
     name: "Exams",
     icon: <MdMessage />,
   },
-  {
-    path: "/trainee/assignment",
-    name: "Assignment Status",
-    icon: <BiAnalyse />,
-  },
   
-  {
-    path: "/presentationstatus",
-    name: "Presentation Status",
-    icon: <AiFillHeart />,
-  },
-
   {
     path: "/logout",
     name: "Log out",

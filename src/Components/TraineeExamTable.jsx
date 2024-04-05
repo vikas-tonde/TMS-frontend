@@ -16,13 +16,17 @@ const TraineeExamTable = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Date",
     }),
+    columnHelper.accessor("moduleName", {
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: "Module Name",
+    }),
     columnHelper.accessor("name", {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Exam Name",
     }),
-    columnHelper.accessor("avgMarks", {
+    columnHelper.accessor("marks", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: "Average Marks",
+      header: "Marks",
     }),
   ];
   const [data] = useState([
