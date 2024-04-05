@@ -1,11 +1,37 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
+// import { useLoaderData } from "react-router";
+import api from "../services/api";
 
 const Table = () => {
+  // const batches = useLoaderData();
+  const [trainees, setTrainees] = useState([]);
+  const [srno, setSrno] = useState(1);
+
+  const incrementSrno = () => {
+    setSrno(srno + 1);
+  };
+  //const [selectedBatch, setSelectedBatch] = useState("");
+
+  useEffect(() => {
+    const fetchTrainees = async () => {
+      try {
+        //console.log(selectedBatch);
+        const response = await api.get(`/api/admin/trainees/Pune`);
+        console.log(response.data.data);
+        setTrainees(response.data.data);
+        // setLoading(false);
+      } catch (error) {
+        console.error("Error fetching trainees:", error);
+        // setLoading(false);
+      }
+    };
+    fetchTrainees();
+  }, []);
 
   const columnHelper = createColumnHelper();
-  
+
   const columns = [
     columnHelper.accessor("", {
       id: "srno",
@@ -34,19 +60,13 @@ const Table = () => {
       header: "",
     }),
   ];
-  const [data] = useState([
-    { srno: 1, empId: 'T50477', name: "Rishi Rathod", avgMarks: 12 },
-    { srno: 2, empId: 'T50498', name: "Vikas Tonde", avgMarks: 11 },
-    { srno: 3, empId: 'T50481', name: "Rutika Vale", avgMarks: 10 },
-    { srno: 4, empId: 'T50482', name: "Shivkanya Doiphode", avgMarks: 19 },
-    { srno: 5, empId: 'T50494', name: "Trupti Panhale", avgMarks: 25 },
-  ]);
+
   const [globalFilter] = useState("");
 
   const [search, setsearch] = useState("");
 
   const table = useReactTable({
-    data,
+    data: trainees,
     columns,
     state: {
       globalFilter,
@@ -92,8 +112,8 @@ const Table = () => {
             ))}
           </thead>
           <tbody>
-            {data.length ? (
-              data.filter((item) => {
+            {trainees.length ? (
+              trainees.filter((item) => {
                 return search.toLowerCase() === '' ? item : item.empId.toLowerCase().includes(search) || item.name.toLowerCase().includes(search)
               }).map((row, i) => (
                 <tr
@@ -101,12 +121,11 @@ const Table = () => {
                   className={`
                   ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-gray-200 
                   `}
-                >
-                  {Object.entries(row).map(([key, value]) => (
-                    <td key={key} className="px-4 py-2 ">
-                      {value}
-                    </td>
-                  ))}
+                > 
+                  <td className="px-4 py-2 ">{srno}</td>
+                  <td className="px-4 py-2 ">{row.employeeId}</td>
+                  <td className="px-4 py-2 ">{row.firstName +" "+ row.lastName}</td>
+                  <td></td>
                   <td key="edit" className="px-4 py-2">
                     <Link to={`/dashboard/${row.empId}`}>
                       <button className="bg-[#0A1C3E] text-white font-bold py-2 px-4 rounded" >
