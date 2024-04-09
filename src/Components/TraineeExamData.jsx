@@ -1,40 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import api from "../services/api";
 import { useLoaderData } from "react-router";
 import { object, string, number, mixed } from 'yup';
 import { useFormik } from 'formik';
 
 const examFormSchema = object().shape({
-  batch: string().required("Employee Id is required"),
+  batch: string().required("Batch is required"),
   examDate: string().required("examDate is required"),
   assessmentType: string().required("assessment type is required"),
   moduleName: string().required("Module is required"),
-  obtainedMarks: number().required("Module is required"),
-  employeeId: string().required("Module is required"),
+  quizName: string().required("Quiz name is required"),
+  obtainedMarks: number().required("Obtained marks is required"),
+  employeeId: string().required("employee id is required"),
   totalMarks: number().positive().required("Total marks is required"),
 });
 
 export default function TraineeExamData() {
   let batches = useLoaderData();
+  const [trainees, setTrainees] = useState([]);
+  const submitHandler = () => {
 
-  const submitHandler = ()=>{
-    
   }
 
   const { handleChange, handleBlur, values, handleSubmit, errors, touched } = useFormik({
     initialValues: {
+      batch: '',
       quizName: '',
       examDate: '',
       assessmentType: '',
       totalMarks: '',
-      examFile: '',
+      moduleName: '',
+      employeeId: '',
+      obtainedMarks: ''
     },
     validationSchema: examFormSchema,
     onSubmit: submitHandler
   });
 
-  const batchOnBlurHandler = () => {
-
+  const batchOnBlurHandler = (e) => {
+    console.log(e);
+    handleChange(e);
+    let batch = values.batch;
+    console.log(batch);
   }
   return (
     <>
@@ -56,6 +63,10 @@ export default function TraineeExamData() {
                   id="batch"
                   name="batch"
                   autoComplete="off"
+                  // value={values.batch}
+                  // onChange={handleChange}
+                  onChange={e => { batchOnBlurHandler(e) }}
+                  // onBlur={(e)=>batchOnBlurHandler(e)}
                   className="block w-96 h-9 rounded-md border-0 py-1.5 text-gray-800 shadow-xl ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset  focus:text-gray-800 mr-2 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
                   <option value="" selected disabled>Select the batch</option>
@@ -67,7 +78,7 @@ export default function TraineeExamData() {
             </div>
             <div className="m-10 col-span-full flex w items-center ">
               <label
-                htmlFor="country"
+                htmlFor="trainee"
                 className="block text-xl font-medium  text-gray-900 mr-2"
               >
                 Employee Id
