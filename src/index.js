@@ -46,13 +46,13 @@ const router = createBrowserRouter(
           <Route path="/exams/single" element={<TraineeExamData />} loader={getBatches} />
           <Route path="/dashboard/:empId" element={<TraineeInfo />} />
 
-          <Route path="/trainees/singleentry" element={<SingleEntryUser />} loader = {getBatches} />
+          <Route path="/trainees/singleentry" element={<SingleEntryUser />} loader={getBatches} />
           <Route path="/trainees/addbulk" element={<BulkEntryXlsx />} />
           <Route path="/exams/addbulk" element={<BulkEntryModuleForm />} loader={getModules} />
           <Route path="/trainees/alltrainees" element={<TraineeTable />} loader={getBatches} />
 
 
-          <Route path="/batch" element={<BatchTable />} loader = {getBatches} />
+          <Route path="/batch" element={<BatchTable />} loader={getBatches} />
           <Route path="/batch/:batchName" element={<Batch />} />
           <Route path="/graph" element={<Analytics />} />
           <Route path="/logout" element={<Logout />} />
@@ -64,8 +64,8 @@ const router = createBrowserRouter(
           {/**
            * trainee
             */ }
-            <Route path="/trainee" element={<Dashboard />} />
-          <Route path="/trainee/dashboard" element={<Dashboard/>} />
+          <Route path="/trainee" element={<Dashboard />} />
+          <Route path="/trainee/dashboard" element={<Dashboard />} />
           <Route path="/trainee/profile" element={<Users />} />
           <Route path="/trainee/exams" element={<TraineeExamTable />} />
           <Route path="/trainee/assignments" element={<AssignmentStatus />} />

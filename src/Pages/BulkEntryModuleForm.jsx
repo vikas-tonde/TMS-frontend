@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const examFormSchema = object().shape({
-    quizName: string().required("Employee Id is required"),
+    assessmentName: string().required("Employee Id is required"),
     examDate: string().required("examDate is required"),
     assessmentType: string().required("assessmentType is required"),
     totalMarks: number().positive().required("Total marks is required"),
@@ -49,7 +49,7 @@ function BulkEntryModuleForm() {
         formdata.append('moduleName', selectedModule);
         formdata.append('date', values.examDate);
         formdata.append('totalMarks', values.totalMarks);
-        formdata.append('quizName', values.quizName);
+        formdata.append('assessmentName', values.assessmentName);
         formdata.append('assessmentType', values.assessmentType);
         try {
             let response = await api.post("/api/admin/bulk/test", formdata, {
@@ -69,7 +69,7 @@ function BulkEntryModuleForm() {
 
     const { handleChange, handleBlur, values, handleSubmit, errors, touched } = useFormik({
         initialValues: {
-            quizName: '',
+            assessmentName: '',
             examDate: '',
             assessmentType: '',
             totalMarks: '',
@@ -87,14 +87,14 @@ function BulkEntryModuleForm() {
                 <div className="space-y-8 ml-36">
                     <div className=" border-gray-900/10 ">
                         <div className="m-5 col-span-full flex items-center ">
-                            <label className="flex items-center justify-center text-gray-700 text-xl font-bold mt-1 mb-2 mr-28" >Quiz Name</label>
+                            <label className="flex items-center justify-center text-gray-700 text-xl font-bold mt-1 mb-2 mr-28" >Assessment Name</label>
                             <div className=" pl-2">
                                 <input
                                     type="text"
-                                    id="quizName"
-                                    name="quizName"
+                                    id="assessmentName"
+                                    name="assessmentName"
                                     placeholder="Enter Quiz Name"
-                                    value={values.quizName}
+                                    value={values.assessmentName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
