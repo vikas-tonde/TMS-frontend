@@ -13,32 +13,34 @@ const examFormSchema = object().shape({
 	employeeId: string().required("employee id is required"),
 });
 
-export default function TraineeExamData() {
+const TraineeExamData = () => {
 	let batches = useLoaderData();
 	const [trainees, setTrainees] = useState([]);
 	const [assessments, setAssessments] = useState([]);
 	const submitHandler = async (values, actions) => {
-		let reqBody = {
-			assessmentId: values.assessmentId,
-			employeeId: values.employeeId,
-			obtainedMarks: values.obtainedMarks
-		};
 		try {
-			let response = await api.post(`/api/admin/single/test`, reqBody);
-			toast.success('User added...!');
+			let reqBody = {
+				assessmentId: values.assessmentId,
+				employeeId: values.employeeId,
+				obtainedMarks: values.obtainedMarks
+			};
+			let response = await api.post("/api/admin/single/assessment", reqBody);
+			console.log(response.data.message);
+			toast.success(response.data.message);
 		} catch (error) {
 			toast.error('Something went wrong while adding User please check all fields carefully...!');
-			console.log(error.response);
+			console.log(error.response.data.message);
 		}
-	}
+		actions.resetForm();
+	};
 
 	const { handleChange, handleBlur, values, handleSubmit, errors, touched } = useFormik({
 		initialValues: {
 			batch: '',
 			assessmentType: '',
 			assessmentId: '',
+			obtainedMarks: 0,
 			employeeId: '',
-			obtainedMarks: ''
 		},
 		validationSchema: examFormSchema,
 		onSubmit: submitHandler
@@ -78,7 +80,7 @@ export default function TraineeExamData() {
 				<h1 className='text-4xl font-semibold m-2 w-full text-center'>Add Trainee Exam Data for Single User</h1>
 			</div>
 			<div className="w-full flex justify-center m-5">
-				<form className="w-full flex justify-center">
+				<form className="w-full flex justify-center" onSubmit={handleSubmit}>
 					<div className="flex-col">
 						<div className="m-10 col-span-full flex w items-center ">
 							<label
@@ -106,7 +108,7 @@ export default function TraineeExamData() {
 						</div>
 						<div className="m-10 col-span-full flex w items-center ">
 							<label
-								htmlFor="trainee"
+								htmlFor="employeeId"
 								className="block text-xl font-medium text-gray-900 mr-2"
 							>
 								Employee Id
@@ -155,15 +157,15 @@ export default function TraineeExamData() {
 						</div>
 						<div className="m-10 col-span-full flex flex-row w items-center">
 							<label
-								htmlFor="assessmentName"
+								htmlFor="assessmentId"
 								className="block text-xl font-medium leading-6 text-gray-900 mr-2"
 							>
 								Assessment Name
 							</label>
 							<div className="pl-6 mt-2 flex-grow ">
 								<select
-									id="assessmentName"
-									name="assessmentName"
+									id="assessmentId"
+									name="assessmentId"
 									value={values.assessmentId}
 									onChange={handleChange}
 									onBlur={handleBlur}
@@ -179,25 +181,6 @@ export default function TraineeExamData() {
 								</select>
 							</div>
 						</div>
-						{/* <div className="m-10 col-span-full flex flex-row w items-center">
-              <label
-                htmlFor="totalMarks"
-                className="block text-xl font-medium leading-6 text-gray-900 mr-2"
-              >
-                Total Marks
-              </label>
-              <div className="pl-12 mt-2 flex-grow">
-                <input
-                  type="text"
-                  pattern="[0-9]*"
-                  title="Please enter only numbers"
-                  name="totalMarks"
-                  id="totalMarks"
-                  autoComplete="off"
-                  className="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
-                />
-              </div>
-            </div> */}
 						<div className="m-10 col-span-full flex flex-row w items-center">
 							<label
 								htmlFor="obtainedMarks"
@@ -207,40 +190,31 @@ export default function TraineeExamData() {
 							</label>
 							<div className="pl-2 mt-2 flex-grow">
 								<input
-									type="text"
-									name="obtainedMarks"
+									type="number"
 									id="obtainedMarks"
+									name="obtainedMarks"
+									value={values.obtainedMarks}
+									onChange={handleChange}
+									onBlur={handleBlur}
 									autoComplete="off"
 									className="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
 								/>
 							</div>
 						</div>
-						{/* <div className="m-11 col-span-full flex flex-row w items-center">
-              <label
-                htmlFor="examDate"
-                className="block text-xl font-medium leading-6 text-gray-900 mr-2"
-              >
-                Exam Date
-              </label>
-              <div className="pl-12 mt-2 flex-grow">
-                <input
-                  type="text"
-                  placeholder="Enter the date in dd/mm/yyyy format"
-                  name="examDate"
-                  id="examDate"
-                  className="shadow appearance-none block bg-white rounded-md w-96 h-9 py-2 px-3 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
-                />
-              </div>
-            </div> */}
-						<div className=" flex items-center justify-center ">
-							<button className=" px-12 py-3 bg-[#0A1C3E] text-xl text-white font-semibold drop-shadow-lg rounded-full items-center justify-center" type='submit' >
+						<div className="flex items-center justify-center">
+							<button className="px-12 py-3 bg-[#0A1C3E] text-xl text-white font-semibold drop-shadow-lg rounded-full items-center justify-center" type='submit'>
 								Submit
 							</button>
 						</div>
 					</div>
 				</form>
+				<p>
+					{JSON.stringify(errors)}
+				</p>
+				<ToastContainer />
 			</div>
-			<ToastContainer />
 		</>
 	);
 }
+
+export default TraineeExamData;
