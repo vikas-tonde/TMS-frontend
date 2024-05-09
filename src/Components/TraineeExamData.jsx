@@ -208,9 +208,9 @@ const TraineeExamData = () => {
 						</div>
 					</div>
 				</form>
-				<p>
+				{/* <p>
 					{JSON.stringify(errors)}
-				</p>
+				</p> */}
 				<ToastContainer />
 			</div>
 		</>
