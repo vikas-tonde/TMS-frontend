@@ -1,6 +1,19 @@
+
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 const Logout = () => {
-    return <h1 className="pt-5 pl-5 pr-10 font-extrabold text-3xl font-serif">Logout</h1>
-  };
-  
-  export default Logout;
-  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Clear any authentication tokens or user data here
+    localStorage.removeItem('authToken'); 
+    sessionStorage.removeItem('userSession'); 
+
+    navigate('/');
+  }, [navigate]);
+
+  return null;
+};
+
+export default Logout;
