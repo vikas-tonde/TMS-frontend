@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { createColumnHelper, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 import { useLoaderData } from "react-router";
-import api from "../services/api";
 
-const Table = () => {
+const BatchTable = () => {
 
   const batches = useLoaderData();
 
@@ -24,20 +23,10 @@ const Table = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Current Training",
     }),
-    // columnHelper.accessor("trainees", {
-    //   cell: (info) => <span>{info.getValue()}</span>,
-    //   header: "Trainees",
-    // }),
-    // columnHelper.accessor("assessments", {
-    //   cell: (info) => <span>{info.getValue()}</span>,
-    //   header: "Assessments",
-    // }),
     columnHelper.accessor("", {
       id: "edit",
       cell: (info) => {
-        console.log(info);
-        const slug = info.row.original.srno;
-        //const slug = batchName.replace(/ /g, "-"); // Generating slug from batchName
+        const slug = info.row.original._id;
         return <Link to={`/batch/${slug}`}>Edit</Link>;
       },
       header: "",
@@ -63,7 +52,7 @@ const Table = () => {
   return (
     <>
       <div className="mx-auto max-w-full md:p-3 2xl:p-6">
-        <div className="" x-data="{ search: '' }">
+        <div className="">
           <div className="mb-2 w-50 flex rounded-md">
             <svg className="w-5 h-8 pl-1 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -73,7 +62,7 @@ const Table = () => {
               onChange={(e) => { setSearch(e.target.value) }}
               className="h-8 px-4 py-1 w-1/3 text-gray-800 focus:outline-none"
               placeholder="Search Trainee by Id / Name"
-              x-model="search" />
+            />
           </div>
         </div>
 
@@ -98,14 +87,14 @@ const Table = () => {
                 return search.toLowerCase() === '' ? item : item.batchName.toLowerCase().includes(search)
               }).map((row, i) => (
                 <tr
-                  key={row.srno}
+                  key={row._id}
                   className={`
                   ${i % 2 === 0 ? "bg-white" : "bg-white"} border-b border-gray-300 h-16 hover:bg-neutral-200 
                   `}
                 >
                   
                     <td className="px-4 py-2 ">
-                      {row._id}
+                      {i + 1}
                     </td>
                     <td className="px-4 py-2 ">
                       {row.batchName}
@@ -134,4 +123,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default BatchTable;

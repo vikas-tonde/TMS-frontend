@@ -15,6 +15,7 @@ import Batch from './Pages/Batch';
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
 import BulkEntryXlsx from './Pages/BulkUserEntry';
 import Dashboard from './Pages/Dashboard';
+import TraineeDashboard from './Pages/TraineeDashboard';
 import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
 import Logout from './Pages/Logout';
@@ -64,8 +65,8 @@ const router = createBrowserRouter(
           {/**
            * trainee
             */ }
-          <Route path="/trainee" element={<Dashboard />} />
-          <Route path="/trainee/dashboard" element={<Dashboard />} />
+          <Route path="/trainee" element={<TraineeDashboard />} />
+          <Route path="/trainee/dashboard" element={<TraineeDashboard />} />
           <Route path="/trainee/profile" element={<Users />} />
           <Route path="/trainee/exams" element={<TraineeExamTable />} />
           <Route path="/trainee/assignments" element={<AssignmentStatus />} />
