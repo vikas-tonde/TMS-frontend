@@ -10,7 +10,6 @@ export function AuthProvider({ children }) {
     let signin = async (values, actions) => {
         let response = await api.post(`/api/users/login`, values);
         let { data } = response.data;
-        console.log("Data:", data.user);
         actions.resetForm();
         if (data?.user === null || data?.user === undefined) {
             setUser(null);

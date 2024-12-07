@@ -24,7 +24,6 @@ function BulkEntryXlsx()
                 'Content-Type': 'multipart/form-data'
             }
         });
-        console.log(response.data);
         toast.success('Users added...!');
         
     } catch (error) {

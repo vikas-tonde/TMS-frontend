@@ -13,7 +13,7 @@ import Analytics from './Pages/Analytics';
 import AssignmentStatus from './Pages/AssignmentStatus';
 import Batch from './Pages/Batch';
 import BulkEntryModuleForm from './Pages/BulkEntryModuleForm';
-import BulkEntryXlsx from './Pages/BulkEntryXlsx';
+import BulkEntryXlsx from './Pages/BulkUserEntry';
 import Dashboard from './Pages/Dashboard';
 import Homepage from './Pages/HomePage';
 import Login from './Pages/LoginPage';
